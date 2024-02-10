@@ -3,18 +3,19 @@ import {
     RouterProvider,
   } from "react-router-dom";
 import App from "../App";
-import Home from "../Pages/Home/Home/Home";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import DashBoard from "../Pages/DashBoard/DashBoard";
 
 
   const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        // errorElement: <ErrorPage />,
+        errorElement: <ErrorPage />,
         children: [
           {
             path: "/",
-            element: <Home />,
+            element: <DashBoard></DashBoard>,
           },
         ],
       },
