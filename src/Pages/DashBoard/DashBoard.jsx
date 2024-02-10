@@ -14,19 +14,19 @@ const DashBoard = () => {
                     <Overview1></Overview1>
                 </div>
 
-                <div className="flex flex-col">
-                <div className="w-full  md:mx-0 relative   ">
-                    <p className='text-3xl font-semibold absolute'>Top Selling Products</p>
-                    <TopSellingP></TopSellingP>
+                <div className="flex flex-col md:flex-row">
+                    <div className="  md:mx-0 relative w-full md:w-1/3 ">
+                        <p className='text-3xl font-semibold absolute'>Top Selling Products</p>
+                        <TopSellingP classN={"w-full"}></TopSellingP>
 
-                </div>
-
-                <div className=" mt-10 md:mx-0 relative w-full">
-                <p className='text-2xl font-semibold absolute left- md:left-24'>Revenue From Each Products</p>
-                    <div className=" mt-5">
-                    <RevenueFromEachProducts></RevenueFromEachProducts>
                     </div>
-                </div>
+                    <div className="  md:mx-0 relative flex-1">
+                        <p className='text-2xl font-semibold absolute left- md:left-24'>Revenue From Each Products</p>
+                        <div className=" mt-5">
+                            <RevenueFromEachProducts></RevenueFromEachProducts>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

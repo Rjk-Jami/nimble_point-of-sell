@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Pages/Shared/Navbar/Navbar';
 
 import { Outlet } from 'react-router-dom';
@@ -6,6 +6,32 @@ import SideNavBar from './Pages/Shared/SideNavBar/SideNavBar';
 
 const App = () => {
   const [sideBar, setSideBar] = useState(false)
+
+  // size controller for chart, so that it reload in every media breakpoint.
+
+  useEffect(() => {
+    const mediaQuery640 = window.matchMedia('(max-width: 640px)');
+    const mediaQuery1024 = window.matchMedia('(min-width: 1024px)');
+    const mediaQuery1280 = window.matchMedia('(min-width: 1280px)');
+    
+    const handleChange = () => {
+      
+      if (mediaQuery640.matches || mediaQuery1024.matches || mediaQuery1280.matches) {
+        window.location.reload();
+      }
+    };
+
+    mediaQuery640.addEventListener('change', handleChange);
+    mediaQuery1024.addEventListener('change', handleChange);
+    mediaQuery1280.addEventListener('change', handleChange);
+    
+   
+    return () => {
+      mediaQuery640.removeEventListener('change', handleChange);
+      mediaQuery1024.removeEventListener('change', handleChange);
+      mediaQuery1280.removeEventListener('change', handleChange);
+    };
+  }, []);
   console.log(sideBar)
 
   const sideBarF = () => {
@@ -23,7 +49,7 @@ const App = () => {
         {/* side bar */}
         <SideNavBar sideBar={sideBar} ></SideNavBar>
         {/* content */}
-        <div className={`${sideBar ? "pl-28" : ""} flex-1 `} >
+        <div className={`${sideBar ? "pl-28" : "md:ml-56"} flex-1 `} >
          
          <Outlet></Outlet>
          

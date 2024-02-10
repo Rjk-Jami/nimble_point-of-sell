@@ -5,7 +5,7 @@ import revenueImg from "../../assets/revenue.png"
 import expenseImg from "../../assets/spending.png"
 const Overview1 = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 ">
                     
                         <div className="  bg-gradient-to-r from-red-200 to-gray-100 rounded-xl p-6 flex justify-between items-center">
                             <img className='w-20' src={productImg} alt="" />

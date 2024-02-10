@@ -14,7 +14,7 @@ echarts.use([
   CanvasRenderer
 ]);
 
-const RevenueFromEachProducts = () => {
+const RevenueFromEachProducts = ({classN}) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const RevenueFromEachProducts = () => {
     };
   }, []);
 
-  return <div ref={chartRef} className='w-full lg:w-auto lg:max-w-lg  ' style={{ width: '', height: '600px' }}></div>;
+  return <div ref={chartRef} className={classN} style={{ width: '', height: '600px' }}></div>;
 };
 
 export default RevenueFromEachProducts;

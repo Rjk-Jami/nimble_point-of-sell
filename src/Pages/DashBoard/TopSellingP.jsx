@@ -21,7 +21,7 @@ echarts.use([
   LabelLayout
 ]);
 
-const TopSellingP = () => {
+const TopSellingP = ({classN}) => {
   useEffect(() => {
     const chartDom = document.getElementById('main');
     const myChart = echarts.init(chartDom);
@@ -35,10 +35,13 @@ const TopSellingP = () => {
       legend: {
         top: 'bottom'
       },
+      
+      
       toolbox: {
         show: true,
         feature: {
-         
+          
+
           saveAsImage: { show: true }
         }
       },
@@ -75,7 +78,7 @@ const TopSellingP = () => {
     };
   }, []);
 
-  return <div id="main" className='w-full ' style={{ width: '', height: '600px' }} />;
+  return <div id="main" className={`${classN}, w-full lg:w-auto xl:max-w-lg mx-auto`} style={{ width: '', height: '600px' }} />;
 };
 
 export default TopSellingP;
