@@ -52,8 +52,17 @@ const RevenueFromEachProducts = ({classN}) => {
             x: 'amount',
             y: 'product'
           }
+        },
+        {
+          // You can change the color here
+          color: 'green'
         }
-      ]
+        
+      ],
+      itemStyle: {
+        // You can change the color here
+        color: 'green'
+      }
     };
 
     myChart.setOption(option);
@@ -63,7 +72,7 @@ const RevenueFromEachProducts = ({classN}) => {
     };
   }, []);
 
-  return <div ref={chartRef} className={classN} style={{ width: '', height: '600px' }}></div>;
+  return <div ref={chartRef} className={`${classN}, text-red-300`} style={{ width: '', height: '600px' }}></div>;
 };
 
 export default RevenueFromEachProducts;
