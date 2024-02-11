@@ -9,16 +9,16 @@ const StockAlertTable = () => {
                     <thead>
                         <tr>
 
-                            <th>Code</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th></th>
+                            <th className='uppercase'>Code</th>
+                            <th className='uppercase'>Product</th>
+                            <th className='uppercase'>Quantity</th>
+                            <th className='uppercase'></th>
                         </tr>
                     </thead>
                     <tbody>
 
 
-                        <tr className="hover">
+                        <tr className="hover:bg-red-50">
 
                             <td>abh1545</td>
                             <td>Monitor</td>

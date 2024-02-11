@@ -11,23 +11,26 @@ const App = () => {
 
   useEffect(() => {
     const mediaQuery640 = window.matchMedia('(max-width: 640px)');
+    const mediaQuery768 = window.matchMedia('(min-width: 768px)');
     const mediaQuery1024 = window.matchMedia('(min-width: 1024px)');
     const mediaQuery1280 = window.matchMedia('(min-width: 1280px)');
     
     const handleChange = () => {
       
-      if (mediaQuery640.matches || mediaQuery1024.matches || mediaQuery1280.matches) {
+      if (mediaQuery640.matches || mediaQuery1024.matches || mediaQuery1280.matches ||mediaQuery768) {
         window.location.reload();
       }
     };
 
     mediaQuery640.addEventListener('change', handleChange);
+    mediaQuery768.addEventListener('change', handleChange);
     mediaQuery1024.addEventListener('change', handleChange);
     mediaQuery1280.addEventListener('change', handleChange);
     
    
     return () => {
       mediaQuery640.removeEventListener('change', handleChange);
+      mediaQuery768.removeEventListener('change', handleChange);
       mediaQuery1024.removeEventListener('change', handleChange);
       mediaQuery1280.removeEventListener('change', handleChange);
     };

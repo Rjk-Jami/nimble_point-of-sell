@@ -4,7 +4,6 @@ import Chart from 'react-apexcharts';
 const TransactionsSummary = ({name,value}) => {
   const options = {
     chart: {
-      height: 350,
       type: 'radialBar',
     },
     plotOptions: {
@@ -12,7 +11,7 @@ const TransactionsSummary = ({name,value}) => {
         hollow: {
           size: '70%',
         },
-        max: 200
+       
       },
     },
     labels: [`${name}`],
@@ -22,12 +21,14 @@ const TransactionsSummary = ({name,value}) => {
   const series = [`${value}`];
 
   return (
-    <Chart
+    <div className="">
+      <Chart
       options={options}
       series={series}
       type="radialBar"
-      height={350}
+      height={250}
     />
+    </div>
   );
 };
 

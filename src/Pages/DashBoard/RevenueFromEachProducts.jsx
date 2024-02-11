@@ -1,78 +1,56 @@
-import React, { useEffect, useRef } from 'react';
-import * as echarts from 'echarts/core';
-import {
-  DatasetComponent,
-  GridComponent
-} from 'echarts/components';
-import { BarChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import React from 'react';
+import Chart from 'react-apexcharts';
 
-echarts.use([
-  DatasetComponent,
-  GridComponent,
-  BarChart,
-  CanvasRenderer
-]);
-
-const RevenueFromEachProducts = ({classN}) => {
-  const chartRef = useRef(null);
-
-  useEffect(() => {
-    const existingChartInstance = echarts.getInstanceByDom(chartRef.current);
-    const myChart = existingChartInstance || echarts.init(chartRef.current);
-
-    const option = {
-      dataset: {
-        source: [
-          ['score', 'amount', 'product'],
-          [89.3, 58212, 'Matcha Latte'],
-          [57.1, 78254, 'Milk Tea'],
-          [74.4, 41032, 'Cheese Cocoa'],
-          [50.1, 12755, 'Cheese Brownie'],
-          [89.7, 20145, 'Matcha Cocoa'],
-          [68.1, 79146, 'Tea'],
-          [19.6, 91852, 'Orange Juice'],
-          [10.6, 101852, 'Lemon Juice'],
-          [32.7, 20112, 'Walnut Brownie']
-        ]
-      },
-      grid: { containLabel: true },
-      xAxis: { name: 'amount' },
-      yAxis: { type: 'category' },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        }
-      },
-      series: [
-        {
-          type: 'bar',
-          encode: {
-            x: 'amount',
-            y: 'product'
-          }
-        },
-        {
-          // You can change the color here
-          color: 'green'
-        }
-        
-      ],
-      itemStyle: {
-        // You can change the color here
-        color: 'green'
+const RevenueFromEachProducts = () => {
+  const options = {
+   
+    colors: ['rgb(248 ,113, 113)'],
+    series: [{
+      data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+    }],
+    chart: {
+      type: 'bar',
+      height: 600
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 4,
+        horizontal: true,
       }
-    };
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+        'United States', 'China', 'Germany'
+      ],
+    },
+    formatter: function (val, opt) {
+      return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val
+    },
+    tooltip: {
+      theme: 'dark',
+      x: {
+        show: false
+      },
+      y: {
+        title: {
+          formatter: function () {
+            return ''
+          }
+        }
+      }}
+  };
 
-    myChart.setOption(option);
-
-    return () => {
-      myChart.dispose();
-    };
-  }, []);
-
-  return <div ref={chartRef} className={`${classN}, text-red-300`} style={{ width: '', height: '600px' }}></div>;
+  return (
+    <Chart
+      options={options}
+      series={options.series}
+      type="bar"
+      height={options.chart.height}
+    />
+  );
 };
 
 export default RevenueFromEachProducts;
