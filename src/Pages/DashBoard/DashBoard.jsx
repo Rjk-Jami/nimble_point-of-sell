@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Overview1 from './Overview1';
 import TopSellingP from './topSellingP';
 import RevenueFromEachProducts from './RevenueFromEachProducts';
 import StockAlertTable from './StockAlertTable';
 import TransactionsSummary from './TransactionsSummary';
 import RecentSales from './RecentSales';
+import { NavContext } from '../../Provider/ActiveNavProvider';
 
 
 const DashBoard = () => {
+    const { nav, setNav} = useContext(NavContext)
+    useEffect(()=>{
+        setNav('/')
+
+    },[])
     return (
         <>
             <div className=" mt-20 container mx-auto">

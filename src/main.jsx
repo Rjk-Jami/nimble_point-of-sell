@@ -6,8 +6,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import router from './router/router';
+import ActiveNavProvider from './Provider/ActiveNavProvider';
+import GlobalVariableProvider from './Provider/GlobalVariableProvider';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-     <RouterProvider router={router} />
+    <ActiveNavProvider>
+    <GlobalVariableProvider>
+    <RouterProvider router={router} />
+    </GlobalVariableProvider>
+    </ActiveNavProvider>
   </React.StrictMode>,
 )

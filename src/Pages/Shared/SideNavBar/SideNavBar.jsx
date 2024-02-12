@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { LuBox } from "react-icons/lu";
 import { TbAdjustmentsCog } from "react-icons/tb";
@@ -9,8 +9,11 @@ import { BsPeople } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import { RiFileList3Line } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
+import { NavContext } from '../../../Provider/ActiveNavProvider';
 
 const SideNavBar = ({ sideBar }) => {
+    const { nav, setNav} = useContext(NavContext)
+    console.log(nav, "side")
     const classForSidebarXl = "bg-red-100 mx-7 md:w-40 md:py-5  md:px-4  rounded-lg hover:bg-red-300 hover:text-white  hover:duration-300 hover:rounded-lg "
     const classForSidebarXlActive = "bg-red-400 mx-7 md:w-40 md:py-5 text-white   md:px-4  rounded-lg "
     
@@ -34,42 +37,42 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/products"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/products") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><LuBox></LuBox></li>
                     </NavLink>
 
                     <NavLink to="/adjustment"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/adjustment") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><TbAdjustmentsCog></TbAdjustmentsCog></li>
                     </NavLink>
 
                     <NavLink to="/expenses"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/expenses") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><RiWallet3Line></RiWallet3Line></li>
                     </NavLink>
 
                     <NavLink to="/purchases"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/purchases") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><MdOutlineShoppingBag></MdOutlineShoppingBag></li>
                     </NavLink>
 
                     <NavLink to="/sales"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/sales")? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><LuBadgePercent></LuBadgePercent></li>
                     </NavLink>
 
                     <NavLink to="/people"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/people")? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><BsPeople></BsPeople></li>
                     </NavLink>
 
                     <NavLink to="/settings"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/settings")? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><FiSettings></FiSettings></li>
                     </NavLink>
 
                     <NavLink to="/reports"
-                        className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
+                        className={({ isActive }) => isActive || (nav === "/reports") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><RiFileList3Line></RiFileList3Line></li>
                     </NavLink>
                 </ul>
@@ -90,7 +93,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/products"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive || (nav === "/products") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center">
                         <LuBox></LuBox>
                         <p className=' text-2xl font-thin'>Products</p>
@@ -98,7 +101,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/adjustment"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive || (nav === "/adjustment") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center">
                         <TbAdjustmentsCog></TbAdjustmentsCog>
                         <p className='  text-2xl font-thin'>Adjustments</p>
@@ -106,7 +109,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/expenses"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive || (nav === "/expenses") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center">
                         <RiWallet3Line></RiWallet3Line>
                         <p className=' text-2xl font-thin'> Expenses</p>
@@ -114,7 +117,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/purchases"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive || (nav === "/purchases") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center">
                         <MdOutlineShoppingBag></MdOutlineShoppingBag>
                         <p className=' text-2xl font-thin'>Purchases</p>
@@ -122,7 +125,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/sales"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive  || (nav === "/sales")? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center" >
                         <LuBadgePercent></LuBadgePercent>
                         <p className=' text-2xl font-thin'> Sales</p>
@@ -130,7 +133,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/people"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive || (nav === "/people") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center">
                         <BsPeople></BsPeople>
                         <p className=' text-2xl font-thin'>People</p>
@@ -138,7 +141,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/settings"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive || (nav === "/settings")? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center">
                         <FiSettings></FiSettings>
                         <p className=' text-2xl font-thin'> Settings</p>
@@ -146,7 +149,7 @@ const SideNavBar = ({ sideBar }) => {
                     </NavLink>
 
                     <NavLink to="/reports"
-                        className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
+                        className={({ isActive }) => isActive || (nav === "/reports")? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                     <li className="md:flex md:flex-col items-center">
                         <RiFileList3Line></RiFileList3Line>
                         <p className=' text-2xl font-thin'> Reports</p>
