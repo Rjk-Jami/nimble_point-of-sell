@@ -8,12 +8,26 @@ import {
 import router from './router/router';
 import ActiveNavProvider from './Provider/ActiveNavProvider';
 import GlobalVariableProvider from './Provider/GlobalVariableProvider';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+import AuthProvider from './Provider/AuthProvider';
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ActiveNavProvider>
+    
+     <AuthProvider>
+     <ActiveNavProvider>
     <GlobalVariableProvider>
+    <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />
+    </QueryClientProvider>
+
     </GlobalVariableProvider>
     </ActiveNavProvider>
+     </AuthProvider>
   </React.StrictMode>,
 )

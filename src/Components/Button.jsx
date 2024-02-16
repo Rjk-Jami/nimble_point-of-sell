@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const Button = ({ children, link, className}) => {
-    
+    // button with nav
   return (
     <div>
       <Link  to={`${link}`} className={`px-5 py-2.5 relative rounded group overflow-hidden font-medium border-2 border-red-300 text-gray-600  inline-block ${className}`}>

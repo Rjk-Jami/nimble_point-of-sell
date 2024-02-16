@@ -7,6 +7,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import DashBoard from "../Pages/DashBoard/DashBoard";
 import Products from "../Pages/Products/Products";
 import CreateProduct from "../Pages/Products/CreateProduct";
+import Login from "../Pages/Login/Login";
 
 
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ import CreateProduct from "../Pages/Products/CreateProduct";
           {
             path: "/createProduct",
             element: <CreateProduct></CreateProduct> ,
+          },
+          {
+            path: "/login",
+            element: <Login></Login>
           },
         ],
       },

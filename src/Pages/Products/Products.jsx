@@ -11,9 +11,14 @@ import { LuTrash2 } from "react-icons/lu";
 import img1 from '../../assets/istockphoto-147747269-612x612.jpg'
 import img2 from '../../assets/istockphoto-182848294-612x612.jpg'
 import { NavContext } from '../../Provider/ActiveNavProvider';
+import useProducts from '../../hooks/useProducts';
+import { FallingLines } from 'react-loader-spinner';
+
 const Products = () => {
     const { nav, setNav} = useContext(NavContext)
     const { searchResults, loading, noResultsFound, handleSearch, searchInputRef } = useSearch();
+    const { products, isLoading, error,refetch } = useProducts()
+  console.log(products)
     const handleDetails=()=>{
         
     }
@@ -49,15 +54,10 @@ const Products = () => {
                         </Button>
                     </div>
                 </div>
-                {/* <div className="">
-                    <a href="" className="btn btn-outline btn-info rounded-md px-3.5 py-1 m-1 overflow-hidden relative group cursor-pointer  font-medium text-black ">
-                        <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-red-200 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease "></span>
-                        <span onClick={handleDownload} className="relative text-info transition duration-300 group-hover:text-white ease">Resume</span>
-                    </a>
-                </div> */}
+                
 
 
-                <div className="bg-red-100 p-5 bg-opacity-40">
+                <div className="bg-white p-5 bg-opacity-100">
                     <div className="overflow-x-auto">
                         <table className="table">
                             {/* head */}
@@ -75,29 +75,41 @@ const Products = () => {
                                 </tr>
                             </thead>
                             <tbody>
+                                {
+                                    isLoading && <div className="flex justify-center">
+                                        <FallingLines
+                                    color="rgb(248, 113, 113)"
+                                    width="100"
+                                    visible={true}
+                                    ariaLabel="falling-circles-loading"
+                                    />
+                                    </div>
+                                }
+                            {
+                                        products?.map(product=> <tr className="hover:bg-red-50">
+                                        <td className=''>
+                                            <img className='w-20 h-20' src={product.image} alt="" />
+                                           
+                                        </td>
+                                        <td className=''>{product.name}</td>
+                                        <td className='font-bold'>{product.code}</td>
+                                        <td className=''>{product.category}</td>
+                                        <td className=''>{product.brand}</td>
+                                        <td className='font-bold'>{product.price}</td>
+                                        <td className={`${product?.stock && parseInt(product.stock) < 20 ? "text-red-400" : "text-green-600"} font-bold`}>{product.stock}</td>
+    
+    
+                                        <td>
+                                            <div className="flex items-center gap-2 text-lg">
+                                                < LuEye className='hover:text-red-300 animate-pulse 	'onClick={handleDetails} ></LuEye>
+                                                < RiEditLine className='hover:text-red-300 'onClick={handleEdit}></RiEditLine>
+                                                < LuTrash2 className='hover:text-red-300' onClick={handleDelete}></LuTrash2>
+                                            </div>
+                                        </td>
+                                    </tr>)
+                                       } 
 
-
-                                <tr className="hover:bg-red-50">
-                                    <td className=''>
-                                        <img className='w-20 h-20' src={img1} alt="" />
-                                        
-                                    </td>
-                                    <td className=''>Name</td>
-                                    <td className=''>Code</td>
-                                    <td className=''>Category</td>
-                                    <td className=''>Brand</td>
-                                    <td className=''>Price</td>
-                                    <td className=''>Stock</td>
-
-
-                                    <td>
-                                        <div className="flex items-center gap-2 text-lg">
-                                            < LuEye className='hover:text-red-300 animate-pulse 	'onClick={handleDetails} ></LuEye>
-                                            < RiEditLine className='hover:text-red-300 'onClick={handleEdit}></RiEditLine>
-                                            < LuTrash2 className='hover:text-red-300' onClick={handleDelete}></LuTrash2>
-                                        </div>
-                                    </td>
-                                </tr>
+                                
 
                             </tbody>
                         </table>

@@ -14,7 +14,11 @@ const CreateProduct = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const [error, setError] = useState(false);
     const { imageUrl, setImageUrl } = useContext(GlobalVariableContext)
+    const { nav, setNav } = useContext(NavContext)
+    useEffect(() => {
+        setNav('/products')
 
+    }, [])
     const {
         register,
         handleSubmit,
@@ -30,6 +34,7 @@ const CreateProduct = () => {
         { value: "microphone", label: "microphone" },
         { value: "mouse", label: "mouse" },
         { value: "speaker", label: "speaker" },
+        { value: "laptop", label: "laptop" },
     ];
     const filterColors = (inputValue) => {
         return categoryOptions.filter((i) =>
@@ -54,7 +59,6 @@ const CreateProduct = () => {
 
     const onSubmit = (data, e) => {
         const price = parseInt(data.price);
-        
         data.cost = price 
         let newPrice = price + (price * 0.15)
          data.price =newPrice 
@@ -73,15 +77,24 @@ const CreateProduct = () => {
         }
         
         console.log(data)
+
+        let createProduct = {
+            name : data.name,
+            image: data.image,
+            code : data.code,
+            category : data.category.value,
+            brand: data.brand,
+            cost : data.cost,
+            price : data.price,
+            stock : data.stock,
+            createDate: data.create
+        }
+        console.log(createProduct)
        
 
     }
-    console.log(imageUrl,'55')
-    const { nav, setNav } = useContext(NavContext)
-    useEffect(() => {
-        setNav('/products')
-
-    }, [])
+    
+    
 
 
     return (

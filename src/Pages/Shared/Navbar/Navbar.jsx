@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import logo from '../../../assets/logo.svg'
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
 const Navbar = ({ sideBarF, sideBar }) => {
+const {user,isLoading,GoogleLogin,Logout, setIsLoading} = useContext(AuthContext)
+const [error, setError] = useState('')  
 
+
+console.log("user from nav", user)
+const handleLogout = ()=>{
+    Logout()
+    .then(result=>{
+        const loggedUser = result.user
+                console.log("nav", loggedUser)
+                
+                navigate(from, { replace: true });
+
+    })
+    
+    .catch(error => {
+        setIsLoading(false)
+        console.log(error)
+        setError(error.message)
+    })
+}
     return (
         <div>
             <div className="navbar bg-white fixed  z-10 ">
@@ -43,8 +65,20 @@ const Navbar = ({ sideBarF, sideBar }) => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn btn-secondary">Button</a>
-                    <a className="btn btn-primary">Button</a>
+                    {
+                        user ?  <>
+                        <div className="avatar placeholder">
+                          <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
+                            <img src={user?.photoURL} alt="" />
+                          </div>
+                        </div>
+                        <button onClick={handleLogout} className="font-semibold btn btn-success mx-4">Log out</button>
+                      </> :
+                        <NavLink to="/login" className="btn btn-secondary">Login</NavLink> 
+                        
+                        
+                        
+                    }
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ const useSearch = () => {
       setLoading(true);
 
       try {
-        const response = await axios.get(`http://localhost:5000/getCollegesByAlphabet/${searchLetter}`);
+        const response = await axios.get(`http://localhost:5000/getProductByCode/${searchLetter}`);
         setSearchResults(response.data);
       } catch (error) {
         console.error(error);
@@ -30,3 +30,4 @@ const useSearch = () => {
 };
 
 export default useSearch;
+
