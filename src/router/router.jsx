@@ -32,7 +32,16 @@ import Login from "../Pages/Login/Login";
             path: "/login",
             element: <Login></Login>
           },
+          // {
+          //   path: "/signUp",
+          //   element: <SignUp></SignUp>
+          // },
         ],
+        
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
       },
   ]);
 

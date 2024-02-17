@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import logo from '../../../assets/logo.svg'
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
+import { BsFillPersonFill } from "react-icons/bs";
+
 const Navbar = ({ sideBarF, sideBar }) => {
 const {user,isLoading,GoogleLogin,Logout, setIsLoading} = useContext(AuthContext)
 const [error, setError] = useState('')  
@@ -69,7 +71,10 @@ const handleLogout = ()=>{
                         user ?  <>
                         <div className="avatar placeholder">
                           <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
-                            <img src={user?.photoURL} alt="" />
+                            {
+                                user?.photoURL ? <img src={user?.photoURL} alt="" /> : <BsFillPersonFill className='w-full text-red-400'></BsFillPersonFill>
+                            }
+                            
                           </div>
                         </div>
                         <button onClick={handleLogout} className="font-semibold btn btn-success mx-4">Log out</button>

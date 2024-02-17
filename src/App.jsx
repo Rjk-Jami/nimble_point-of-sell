@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from './Pages/Shared/Navbar/Navbar';
 
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import SideNavBar from './Pages/Shared/SideNavBar/SideNavBar';
+import { AuthContext } from './Provider/AuthProvider';
+import Login from './Pages/Login/Login';
 
 const App = () => {
   const [sideBar, setSideBar] = useState(false)
+  const {user, isLoading} = useContext(AuthContext)
+  const location = useLocation()
+ 
 
   // size controller for chart, so that it reload in every media breakpoint.
 
@@ -46,20 +51,25 @@ const App = () => {
 
 
   return (
+   
+   <>
+   { user ? 
     <div className='relative'>
-      <Navbar sideBarF={sideBarF} sideBar={sideBar} ></Navbar>
-      <div className="flex relative">
-        {/* side bar */}
-        <SideNavBar sideBar={sideBar} ></SideNavBar>
-        {/* content */}
-        <div className={`${sideBar ? "pl-28" : "md:ml-56"} flex-1 `} >
-         
-         <Outlet></Outlet>
-         
-        </div>
+    <Navbar sideBarF={sideBarF} sideBar={sideBar} ></Navbar>
+    <div className="flex relative">
+      {/* side bar */}
+      <SideNavBar sideBar={sideBar} ></SideNavBar>
+      {/* content */}
+      <div className={`${sideBar ? "pl-28" : "md:ml-56"} flex-1 `} >
+       
+       <Outlet></Outlet>
+       
       </div>
-    
     </div>
+  
+  </div> : <Login></Login>
+   }
+   </>
 
   );
 };
