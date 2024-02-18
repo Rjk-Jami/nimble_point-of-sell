@@ -19,6 +19,7 @@ const Products = () => {
     const { handleKeyUp, newProducts, setNewProducts,noResult} = useSearch();
     const { products, isLoading, error,refetch } = useProducts()
     const  searchInputRef = useRef(null)
+
     useEffect(()=>{
         setNewProducts(products)
 
@@ -42,8 +43,11 @@ const Products = () => {
             {/* product nav */}
             <div className="mt-20 px-5 lg:px-5 xl:px-0">
                 <div className="flex gap-3 flex-col  lg:flex-row justify-between">
-                    <div className="w-full lg:w-1/3">
+                    <div className="w-full lg:w-1/3 flex">
+                        <div className="flex-1">
                         <Search handleKeyUp={handleKeyUp} searchInputRef={searchInputRef} ></Search>
+                        </div>
+                        
                     </div>
                     <div className="flex gap-3">
                         <Button link={'/'}>
@@ -82,16 +86,7 @@ const Products = () => {
                                 </tr>
                             </thead>
                             <tbody className=''>
-                                {
-                                    isLoading && <div className="flex justify-center">
-                                        <FallingLines
-                                    color="rgb(248, 113, 113)"
-                                    width="100"
-                                    visible={true}
-                                    ariaLabel="falling-circles-loading"
-                                    />
-                                    </div>
-                                }
+                                
                                 
                             {
                                         newProducts?.map(product=> <tr className="hover:bg-red-50">

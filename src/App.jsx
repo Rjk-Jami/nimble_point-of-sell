@@ -10,8 +10,10 @@ const App = () => {
   const [sideBar, setSideBar] = useState(false)
   const {user, isLoading} = useContext(AuthContext)
   const location = useLocation()
- 
-
+  //need to change
+  const inLog = localStorage.getItem('inLog')
+  const inLogToken = import.meta.env.VITE_INLOGTOKEN
+  console.log(inLogToken, "inLogToken")
   // size controller for chart, so that it reload in every media breakpoint.
 
   useEffect(() => {
@@ -53,9 +55,10 @@ const App = () => {
   return (
    
    <>
-   { user ? 
+   { (inLogToken ===inLog || user) ? 
     <div className='relative'>
     <Navbar sideBarF={sideBarF} sideBar={sideBar} ></Navbar>
+    
     <div className="flex relative">
       {/* side bar */}
       <SideNavBar sideBar={sideBar} ></SideNavBar>

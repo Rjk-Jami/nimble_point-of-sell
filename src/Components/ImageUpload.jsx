@@ -32,13 +32,17 @@ const ImageUpload = () => {
                 setImageUrl(null);
             });
     }
+    const handleImageDelete =()=>{
+        setImageUrl("")
+    }
 
 
     return (
         <div>
             <h4></h4>
             <div className="w-full">
-                <ImageUploader
+                <ImageUploader 
+                onFileRemoved={handleImageDelete}
                 style={{ height: 200, width: 250, background: 'rgb(254 226 226)' }}
                     onFileAdded={(img) => handleImageUpload(img)}
                 />

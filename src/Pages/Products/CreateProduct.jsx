@@ -8,6 +8,9 @@ import AsyncSelect from "react-select/async";
 import ImageUpload from '../../Components/ImageUpload';
 import { GlobalVariableContext } from '../../Provider/GlobalVariableProvider';
 import moment from 'moment';
+import { FaArrowLeft } from "react-icons/fa6";
+import { NavLink, Navigate } from 'react-router-dom';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const CreateProduct = () => {
     const { productCode } = useGenerator()
@@ -15,16 +18,16 @@ const CreateProduct = () => {
     const [error, setError] = useState(false);
     const { imageUrl, setImageUrl } = useContext(GlobalVariableContext)
     const { nav, setNav } = useContext(NavContext)
+    const [axiosSecure] = useAxiosSecure()
     useEffect(() => {
         setNav('/products')
-
+        setImageUrl('')
     }, [])
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
-    // category start
+    const { register,handleSubmit,reset,formState: { errors },} = useForm()
+    console.log(imageUrl,"imageUrl")
+
+
+    // category start select
     const categoryOptions = [
         { value: "monitor", label: "monitor" },
         { value: "camera", label: "camera" },
@@ -36,20 +39,23 @@ const CreateProduct = () => {
         { value: "speaker", label: "speaker" },
         { value: "laptop", label: "laptop" },
     ];
+    // category start select 2
     const filterColors = (inputValue) => {
         return categoryOptions.filter((i) =>
             i.label.toLowerCase().includes(inputValue.toLowerCase()),
         );
     };
-
+// category start select 3
     const loadOptions = (inputValue, callback) => {
         setTimeout(() => {
             callback(filterColors(inputValue));
         }, 200);
     };
+    // category start select 4
     const handleChange = (option) => {
         setSelectedOption(option);
     };
+    // category start select 5
     const customStyles = {
         control: (provided, state) => ({
             ...provided,
@@ -66,10 +72,11 @@ const CreateProduct = () => {
         data.stock =stock  
         data.create = moment().format('L')
         data.category = selectedOption
+         
         if(imageUrl!== ""){
             data.image=imageUrl
             setError(false)
-            e.target.reset();
+            
         }
         if(!data.image){
             setError(true)
@@ -90,7 +97,23 @@ const CreateProduct = () => {
             createDate: data.create
         }
         console.log(createProduct)
-       
+        if(createProduct.image === " "){
+            e.preventDefault()
+            setError(true)
+        }
+        if(createProduct?.image !== undefined){
+            axiosSecure.post('/createProduct', createProduct)
+            .then(res=>{
+                console.log(res)
+                setError(false)
+                reset()
+                setImageUrl('')
+
+
+                // need to add swift
+            })
+        }
+        
 
     }
     
@@ -98,8 +121,15 @@ const CreateProduct = () => {
 
 
     return (
-        <div className='mt-20 container mx-auto'>
-            <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold mb-6'>Create Products</h1>
+        <div className='mt-20 container mx-auto  '>
+            
+           <div className=" flex items-center  mb-6 gap-2">
+            <div  className="relative">
+                <NavLink to={'/products'}>            <FaArrowLeft  className='text-3xl pt-1 text-red-400 hover:text-red-300 '></FaArrowLeft>
+</NavLink>
+            </div>
+           <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold '>Create Products</h1>
+           </div>
             <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto space-y-3">
                 <div className="flex flex-col lg:flex-row gap-3">
                     <div className=" w-11/12 mx-auto lg:mx-0 lg:w-2/3 grid grid-cols-1  gap-3">

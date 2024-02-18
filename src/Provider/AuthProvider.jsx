@@ -42,10 +42,16 @@ const AuthProvider = ({children}) => {
                 axios.post('http://localhost:5000/jwt',{email : currentUser.email})
                 .then(data=>{
                     localStorage.setItem('access-token', data.data.token)
+                      //need to change -=========================================
+
+                    localStorage.setItem('inLog', 'nimblePos-01786076080')
+
                 })
             }
             else{
+                
                 localStorage.removeItem('access-token')
+                localStorage.removeItem('inLog')
             }
 
         })

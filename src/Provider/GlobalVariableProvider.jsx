@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 export const GlobalVariableContext = createContext(null)
 const GlobalVariableProvider = ({children}) => {
-    const [imageUrl, setImageUrl] = useState('')
+    const [imageUrl, setImageUrl] = useState(' ')
     
     
     
