@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { RiListSettingsLine } from "react-icons/ri";
 import useSearch from '../../hooks/UseSearch';
 import Search from '../../Components/Search';
@@ -16,9 +16,16 @@ import { FallingLines } from 'react-loader-spinner';
 
 const Products = () => {
     const { nav, setNav} = useContext(NavContext)
-    const { searchResults, loading, noResultsFound, handleSearch, searchInputRef } = useSearch();
+    const { handleKeyUp, newProducts, setNewProducts,noResult} = useSearch();
     const { products, isLoading, error,refetch } = useProducts()
-  console.log(products)
+    const  searchInputRef = useRef(null)
+    useEffect(()=>{
+        setNewProducts(products)
+
+    },[products])
+
+   
+
     const handleDetails=()=>{
         
     }
@@ -36,7 +43,7 @@ const Products = () => {
             <div className="mt-20 px-5 lg:px-5 xl:px-0">
                 <div className="flex gap-3 flex-col  lg:flex-row justify-between">
                     <div className="w-full lg:w-1/3">
-                        <Search handleSearch={handleSearch} searchInputRef={searchInputRef} ></Search>
+                        <Search handleKeyUp={handleKeyUp} searchInputRef={searchInputRef} ></Search>
                     </div>
                     <div className="flex gap-3">
                         <Button link={'/'}>
@@ -57,9 +64,9 @@ const Products = () => {
                 
 
 
-                <div className="bg-white p-5 bg-opacity-100">
-                    <div className="overflow-x-auto">
-                        <table className="table">
+                <div className="bg-white p-5 bg-opacity-100 relative">
+                    <div className="overflow-x-auto ">
+                        <table className="table ">
                             {/* head */}
                             <thead>
                                 <tr>
@@ -74,7 +81,7 @@ const Products = () => {
                                     <th className='uppercase'>action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className=''>
                                 {
                                     isLoading && <div className="flex justify-center">
                                         <FallingLines
@@ -85,8 +92,9 @@ const Products = () => {
                                     />
                                     </div>
                                 }
+                                
                             {
-                                        products?.map(product=> <tr className="hover:bg-red-50">
+                                        newProducts?.map(product=> <tr className="hover:bg-red-50">
                                         <td className=''>
                                             <img className='w-20 h-20' src={product.image} alt="" />
                                            
@@ -112,13 +120,19 @@ const Products = () => {
                                 
 
                             </tbody>
+                            
                         </table>
+                        
                     </div>
                 </div>
 
 
             </div>
-            
+            {
+                                    noResult && <div>
+                                        <p className='text-2xl text-center '>{noResult}</p>
+                                    </div>
+                                }
         </div>
     );
 };

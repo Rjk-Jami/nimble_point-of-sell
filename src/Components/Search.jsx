@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { FaSearch } from "react-icons/fa";
 
-const Search = ({ handleSearch, searchInputRef }) => {
+const Search = ({ handleKeyUp, searchInputRef }) => {
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -28,15 +28,16 @@ const Search = ({ handleSearch, searchInputRef }) => {
 
                 <div className="join border-0 w-full  rounded-none">
                     <div className=" flex relative w-full ">
-                        <input type="text" ref={searchInputRef} className="w-full input  input-bordered border-red-300 focus:outline-none focus:bg-red-100 focus:bg-opacity-40 join-item bg-transparent " placeholder="Search With Code" />
-                        <div className="  hidden  absolute lg:flex items-center gap-1 inset-y-0 right-0  text-xs opacity-40 mx-2">
+                    <FaSearch className='h-full text-xl absolute  inset-y-0 left-0  ms-3' />
+                        <input type="text"  onKeyUp={handleKeyUp} ref={searchInputRef} className="w-full input  input-bordered border-red-300 focus:outline-none focus:bg-red-100 focus:bg-opacity-40 join-item bg-transparent ps-10" placeholder="Search With Code" />
+                        <div className="  hidden  absolute lg:flex  items-center gap-1 inset-y-0 right-0  text-xs opacity-40 mx-2">
                             <kbd className="kbd">ctrl</kbd>
                             <p>+</p>
                             <kbd className="kbd">k</kbd>
+                            
                         </div>
                     </div>
-                    <button onClick={handleSearch} className="btn join-item btn-outline hover:bg-red-400 hover:border-red-300 border-red-300"><FaSearch />
-                    </button>
+                    
 
                 </div>
             </div>

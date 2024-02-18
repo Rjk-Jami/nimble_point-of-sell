@@ -1,32 +1,33 @@
 import { useState, useRef } from 'react';
 import axios from 'axios';
+import useProducts from './useProducts';
 
 const useSearch = () => {
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [noResultsFound, setNoResultsFound] = useState(false);
-  const searchInputRef = useRef(null);
+  const { products, isLoading, error, refetch } = useProducts()
+  const [newProducts, setNewProducts] = useState([])
+  const [noResult, setNoResult] = useState("")
 
-  const handleSearch = async () => {
-    const searchLetter = searchInputRef.current.value;
-    if (searchLetter) {
-      setNoResultsFound(true);
-      setLoading(true);
 
-      try {
-        const response = await axios.get(`http://localhost:5000/getProductByCode/${searchLetter}`);
-        setSearchResults(response.data);
-      } catch (error) {
-        console.error(error);
+  const handleKeyUp = (event) => {
+    if (event?.target?.value) {
+      const searchResults = products.filter(product => product.name.toLowerCase().includes(event?.target?.value.toLowerCase()))
+      console.log(searchResults)
+      if (searchResults.length !== 0) {
+        setNewProducts(searchResults)
+        setNoResult("")
       }
-
-      setLoading(false);
+      else {
+        setNoResult("No Data Found!")
+        setNewProducts([])
+      }
     }
-  };
+    else {
+      setNewProducts(products)
+    }
+  }
 
-  console.log(searchResults);
 
-  return { searchResults, loading, noResultsFound, handleSearch , searchInputRef};
+  return { handleKeyUp, newProducts, setNewProducts, noResult };
 };
 
 export default useSearch;
