@@ -100,6 +100,7 @@ const Products = () => {
                                     <th className='uppercase'>Category</th>
                                     <th className='uppercase'>Brand</th>
                                     <th className='uppercase'>Price</th>
+                                    <th className='uppercase'>Sales</th>
                                     <th className='uppercase'>Stock</th>
                                     <th className='uppercase'>action</th>
                                 </tr>
@@ -118,12 +119,15 @@ const Products = () => {
                                         <td className=''>{product.category}</td>
                                         <td className=''>{product.brand}</td>
                                         <td className='font-bold'>{product.price}</td>
+                                        <td className='font-bold text-fuchsia-500'>{product.sales}</td>
                                         <td className={`${product?.stock && parseInt(product.stock) < 20 ? "text-red-400" : "text-green-600"} font-bold`}>{product.stock}</td>
 
 
                                         <td>
                                             <div className="flex items-center gap-2 text-lg">
-                                                < LuEye className='hover:text-red-300 animate-pulse ' onClick={()=>handleDetails(product._id)} ></LuEye>
+                                                <NavLink to={`/productDetails/${product._id}`}>
+                                                < LuEye className='hover:text-red-300 animate-pulse '  ></LuEye>
+                                                </NavLink>
                                                 <NavLink to={`/updateProduct/${product._id}`}>
                                                 < RiEditLine className='hover:text-red-300 '></RiEditLine>
                                                 </NavLink>
