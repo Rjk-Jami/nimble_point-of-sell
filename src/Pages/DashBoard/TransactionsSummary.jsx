@@ -9,7 +9,7 @@ const TransactionsSummary = ({name,value}) => {
     plotOptions: {
       radialBar: {
         hollow: {
-          size: '70%',
+          size: '40%',
         },
        
       },
@@ -27,6 +27,7 @@ const TransactionsSummary = ({name,value}) => {
       series={series}
       type="radialBar"
       height={250}
+      
     />
     </div>
   );

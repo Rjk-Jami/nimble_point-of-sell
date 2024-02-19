@@ -8,6 +8,7 @@ import DashBoard from "../Pages/DashBoard/DashBoard";
 import Products from "../Pages/Products/Products";
 import CreateProduct from "../Pages/Products/CreateProduct";
 import Login from "../Pages/Login/Login";
+import UpdateProduct from "../Pages/Products/UpdateProduct";
 
 
   const router = createBrowserRouter([
@@ -29,9 +30,13 @@ import Login from "../Pages/Login/Login";
             element: <CreateProduct></CreateProduct> ,
           },
           {
-            path: "/login",
-            element: <Login></Login>
+            path: "/updateProduct/:id",
+            element:<UpdateProduct></UpdateProduct>
           },
+          // {
+          //   path: "/login",
+          //   element: <Login></Login>
+          // },
           // {
           //   path: "/signUp",
           //   element: <SignUp></SignUp>

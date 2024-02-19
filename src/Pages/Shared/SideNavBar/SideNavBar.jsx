@@ -25,8 +25,8 @@ const SideNavBar = ({ sideBar }) => {
 
     return (
         <div>
-            <div className={`mt-16 transition-transform bg-red-50 ${sideBar ? "translate-x-0  " : "-translate-x-full  md:translate-x-0 absolute  md:hidden"
-                }   text-4xl bg-transparent overflow-auto scrollbar h-full fixed  top-[1px]  md:top-[1px] lg:top-[6px] xl:top-1 left-0 z-10`}
+            <div className={`  mt-16 transition-transform bg-red-50 ${sideBar ? "translate-x-0  " : "-translate-x-full absolute md:translate-x-0   md:hidden"
+                }   text-4xl  overflow-auto scrollbar h-full fixed  top-[0px]  md:top-[0px] lg:top-[6px] xl:top-1 left-0 z-10`}
                 style={{ height: 'calc(100vh - 4rem)', position: 'fixed', left: '0', zIndex: '10' }}
             >
                 <ul className='flex flex-col mx-3 text-gray-600 flex-grow '>
@@ -81,7 +81,7 @@ const SideNavBar = ({ sideBar }) => {
             <div
                 id='xl'
                 className={`mt-16 transition-transform ${!sideBar ? "md:-translate-x-0" : "-translate-x-full absolute  "
-                    } ease-out duration-300  hidden md:block  text-4xl  overflow-auto scrollbar fixed z-10 lg:top-1 `}
+                    } ease-out duration-300  hidden xl:block  text-4xl  overflow-auto scrollbar fixed  z-10 lg:top-1 `}
             >
                 <ul className=' text-gray-600 h-screen flex flex-col gap-7 items-center my-7 '>
                     <NavLink to="/"

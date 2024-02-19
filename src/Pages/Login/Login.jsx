@@ -52,9 +52,9 @@ const Login = () => {
 
 
     return (
-        <div className=" bg-red-400 ">
+        <div className=" bg-red-400 w-full">
 
-            <div className=" w-full h-screen flex items-center">
+            <div className="  h-screen flex items-center">
                 <div className="md:w-8/12 xl:w-9/12 hidden md:flex items-center">
                     {/* <img className='h-80' src={img} alt=""/> */}
                     <div className="mx-8">

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const RecentSales = () => {
     return (
-        <div>
+        <div className='overflow-x-auto'>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

@@ -50,7 +50,7 @@ const TopSellingP = ({classN}) => {
         {
           name: 'Top Selling Products',
           type: 'pie',
-          radius: [50, 200],
+          radius: [20, 150],
           center: ['50%', '50%'],
           roseType: 'area',
           itemStyle: {

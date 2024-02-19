@@ -2,7 +2,7 @@ import React from 'react';
 
 const StockAlertTable = () => {
     return (
-        <div>
+        <div className='overflow-x-autos'>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
