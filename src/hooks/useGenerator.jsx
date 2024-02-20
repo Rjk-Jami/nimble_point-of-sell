@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const useGenerator = () => {
     const [productCode, setProductCode] = useState('');
+    const [reference, setReference] = useState('');
 
 useEffect(()=>{
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -14,9 +15,13 @@ useEffect(()=>{
   }
 
     setProductCode(result);
+
+    let randomReference = Math.floor(Math.random() * 1000000)
+    setReference(randomReference)
+
 },[])
 
-    return {productCode}
+    return {productCode,reference}
 };
 
 export default useGenerator;

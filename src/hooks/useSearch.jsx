@@ -25,9 +25,26 @@ const useSearch = () => {
       setNewProducts(products)
     }
   }
+  const handleKeyUpCode = (event) => {
+    if (event?.target?.value) {
+      const searchResults = products.filter(product => product.code.toLowerCase().includes(event?.target?.value.toLowerCase()))
+      console.log(searchResults)
+      if (searchResults.length !== 0) {
+        setNewProducts(searchResults)
+        setNoResult("")
+      }
+      else {
+        setNoResult("No Data Found!")
+        setNewProducts([])
+      }
+    }
+    else {
+      setNewProducts(products)
+    }
+  }
 
 
-  return { handleKeyUp, newProducts, setNewProducts, noResult };
+  return { handleKeyUp, newProducts, setNewProducts, noResult ,handleKeyUpCode};
 };
 
 export default useSearch;
