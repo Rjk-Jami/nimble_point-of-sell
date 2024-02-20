@@ -27,7 +27,6 @@ const UpdateProduct = () => {
     // console.log(id, 'update')
     //find by id 
     const product = products?.find((product) => product._id === id)
-    // console.log(product)
 
     // category start select
     const categoryOptions = [

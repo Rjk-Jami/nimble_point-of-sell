@@ -56,7 +56,7 @@ const Products = () => {
     return (
         <div className='mt-20 container mx-auto '>
 
-            <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Products List</h1>
+            <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Products List : {products?.length}</h1>
 
             {/* product nav */}
             <div className="mt-20 px-5 lg:px-5 xl:px-0">
@@ -68,7 +68,7 @@ const Products = () => {
 
                     </div>
                     <div className="flex gap-3">
-                        <p>total:{products?.length}</p>
+                        
                         <Button link={'/'}>
                             <span className='flex items-center gap-2'>
                                 <span className="relative group-hover:text-white font-semibold">Pdf</span>
@@ -88,7 +88,7 @@ const Products = () => {
 
 
                 <div className="bg-white p-5 bg-opacity-100 relative">
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto scrollbar" >
                         <table className="table  table-xs table-pin-rows table-pin-cols">
                             {/* head */}
                             <thead>

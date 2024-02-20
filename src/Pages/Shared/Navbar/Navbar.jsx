@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import logo from '../../../assets/logo.svg'
+import logo from '../../../assets/logo.png'
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { BsFillPersonFill } from "react-icons/bs";
@@ -51,22 +51,9 @@ const handleLogout = ()=>{
                     
                 </div>
 
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li><a>Item 3</a></li>
-                    </ul>
-                </div>
+                
                 <div className="navbar-end">
+                <NavLink to="/POS" className=" px-3 py-2 btn-outline mx-3 text-xl font-bold text-red-400 border-2 shadow-lg shadow-red-400 hover:bg-red-400 hover:shadow-lg hover:shadow-red-400 hover:border-0">POS</NavLink>
                     {
                         user ?  <>
                         <div className="avatar placeholder">

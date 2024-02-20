@@ -3,7 +3,7 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 import { AiFillEye } from "react-icons/ai";
 import img from '../../assets/logo.png'
 import { AuthContext } from '../../Provider/AuthProvider';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useNavigation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const Login = () => {
@@ -11,11 +11,13 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
-
-
+  
     const navigate = useNavigate();
     const to = '/'
     console.log("user", user)
+    useEffect(()=>{
+        user &&  navigate('/');
+    },[user,navigate])
 
     const onSubmit = (data) => {
         console.log(data);

@@ -3,9 +3,9 @@ import { FaSearch } from "react-icons/fa";
 import { FallingLines } from 'react-loader-spinner';
 import useProducts from '../hooks/useProducts';
 
-const Search = ({ handleKeyUp, searchInputRef }) => {
+const Search = ({ handleKeyUp, searchInputRef, handleSelect }) => {
     const { products, isLoading, error,refetch } = useProducts()
-
+   
     useEffect(() => {
         const handleKeyPress = (event) => {
             // Check if Ctrl (or Command on Mac) + K is pressed
@@ -24,7 +24,9 @@ const Search = ({ handleKeyUp, searchInputRef }) => {
             window.removeEventListener('keydown', handleKeyPress);
         };
     }, []);
+const doNothing =()=>{
 
+}
     return (
         <div>
             <div className="">
@@ -37,7 +39,7 @@ const Search = ({ handleKeyUp, searchInputRef }) => {
                                         <span className="loading loading-spinner loading-xl absolute text-red-400 h-full inset-y-0 left-0  ms-3"></span>
                                     </div> : <FaSearch className='h-full text-xl absolute  inset-y-0 left-0  ms-3' />
                                 }
-                        <input type="text"  onKeyUp={handleKeyUp} ref={searchInputRef} className="w-full input  input-bordered border-red-300 focus:outline-none focus:bg-red-100 focus:bg-opacity-40 join-item bg-transparent ps-10" placeholder="Search With Code" />
+                        <input onSelect={handleSelect ? handleSelect : ()=>doNothing()} type="text"  onKeyUp={handleKeyUp} ref={searchInputRef} className="w-full input  input-bordered border-red-300 focus:outline-none focus:bg-red-100 focus:bg-opacity-40 join-item bg-transparent ps-10" placeholder="Search With Name" />
                         <div className="  hidden  absolute lg:flex  items-center gap-1 inset-y-0 right-0  text-xs opacity-40 mx-2">
                             <kbd className="kbd">ctrl</kbd>
                             <p>+</p>

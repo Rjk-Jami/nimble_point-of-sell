@@ -10,6 +10,7 @@ import CreateProduct from "../Pages/Products/CreateProduct";
 import Login from "../Pages/Login/Login";
 import UpdateProduct from "../Pages/Products/UpdateProduct";
 import ProductDetails from "../Pages/Products/productDetails";
+import POS from "../Pages/POS/POS";
 
 
   const router = createBrowserRouter([
@@ -37,6 +38,10 @@ import ProductDetails from "../Pages/Products/productDetails";
           {
             path: "/productDetails/:id",
             element:<ProductDetails></ProductDetails>
+          },
+          {
+            path: "/POS",
+            element:<POS></POS>
           },
           // {
           //   path: "/login",
