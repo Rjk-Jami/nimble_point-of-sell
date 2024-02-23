@@ -22,10 +22,11 @@ const App = () => {
     const mediaQuery768 = window.matchMedia('(min-width: 768px)');
     const mediaQuery1024 = window.matchMedia('(min-width: 1024px)');
     const mediaQuery1280 = window.matchMedia('(min-width: 1280px)');
+    const mediaQuery1366 = window.matchMedia('(min-width: 1366px)');
 
     const handleChange = () => {
 
-      if (mediaQuery640.matches || mediaQuery1024.matches || mediaQuery1280.matches || mediaQuery768) {
+      if (mediaQuery640.matches || mediaQuery1024.matches || mediaQuery1280.matches || mediaQuery768 || mediaQuery1366) {
         window.location.reload();
       }
     };
@@ -34,6 +35,7 @@ const App = () => {
     mediaQuery768.addEventListener('change', handleChange);
     mediaQuery1024.addEventListener('change', handleChange);
     mediaQuery1280.addEventListener('change', handleChange);
+    mediaQuery1366.addEventListener('change', handleChange);
 
 
     return () => {
@@ -41,6 +43,7 @@ const App = () => {
       mediaQuery768.removeEventListener('change', handleChange);
       mediaQuery1024.removeEventListener('change', handleChange);
       mediaQuery1280.removeEventListener('change', handleChange);
+      mediaQuery1366.removeEventListener('change', handleChange);
     };
   }, []);
   console.log(sideBar)
