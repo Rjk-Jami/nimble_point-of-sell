@@ -30,17 +30,7 @@ const Products = () => {
 
 
 
-    const handleDetails = () => {
-        toast.promise(
-            handleDetails,
-            {
-                loading: 'Saving...',
-                success: <b>Settings saved!</b>,
-                error: <b>Could not save.</b>,
-            }
-        );
-    }
-   
+    
     const handleDelete = (id) => {
         console.log(id)
         axiosSecure.delete(`/deleteProduct/${id}`)

@@ -11,6 +11,7 @@ import useGenerator from '../../hooks/useGenerator';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { GlobalVariableContext } from '../../Provider/GlobalVariableProvider';
 import moment from 'moment';
+import toast from 'react-hot-toast';
 const POS = () => {
     const { user } = useContext(AuthContext)
     const { products, isLoading, error, refetch } = useProducts()
@@ -38,15 +39,15 @@ const POS = () => {
     //Payment Method
     const [paymentMethod, setPaymentMethod] = useState('CASH')
     const [checkCheckout, setCheckCheckout] = useState(false)
-    
-    useEffect(()=>{
-        if(selectedProducts.length >0){
+
+    useEffect(() => {
+        if (selectedProducts.length > 0) {
             setCheckCheckout(true)
         }
-        else{
+        else {
             setCheckCheckout(false)
         }
-    },[selectedProducts])
+    }, [selectedProducts])
 
     useEffect(() => {
         setNewProducts(products)
@@ -156,7 +157,7 @@ const POS = () => {
         }
     };
 
-    
+
     // delete selected Product
     const handleDelete = (id) => {
         //  console.log(id)
@@ -222,7 +223,7 @@ const POS = () => {
     const coupons = [
         'RSK24', 'RJK24'
     ]
-    const [coupon, setCoupon] =useState(null)
+    const [coupon, setCoupon] = useState(null)
     const handleKeyUpForCoupon = (event) => {
 
         if (event?.target?.value) {
@@ -257,25 +258,66 @@ const POS = () => {
     }
 
     // console.log(discount)
-    
+
     // checkout
     const onSubmit = (data, e) => {
-        console.log(data)
-        const sale = {
-            reference : reference,
-            customer : data?.name,
-            biller : user?.email,
-            products : selectedProducts,
-            totalPrice: totalCost,
-            discount : discount,
-            coupon : coupon && coupon,
-            revenue : grandTotal,
-            saleDate :  moment().format('L')
+        // console.log(data)
 
+        if (selectedProducts?.length > 0) {
+            axiosSecure.post('/sales', {
+                reference: reference,
+                customer: data?.name,
+                biller: user?.email,
+                products: selectedProducts.map(product =>({
+                    id: product._id,
+                    quantity: product.quantity
+                })),
+                totalPrice: totalCost,
+                discount: discount,
+                coupon: coupon && coupon,
+                revenue: grandTotal,
+                saleDate: moment().format('L')
+            })
+                .then(data => {
+                    // console.log(data.data.insertedId)
+                    if (data?.data.insertedId) {
+                        toast.success('Sale Done')
+                        const updateProducts = products?.filter(product => {
+                            return selectedProducts.some(selected => selected._id === product._id)
+                        }).map(product => {
+                            const selectedProduct = selectedProducts?.find(selected => selected._id === product._id)
+                            if (selectedProduct) {
+                                // console.log(selectedProduct, "jami")
+                                const newSale = product.sales + selectedProduct.quantity
+                                const newStock = product.stock - selectedProduct.quantity
+                                return { ...product, sales: newSale, stock: newStock }
+                            }
+                            return (product)
+                        })
+
+                        // console.log(updateProducts)
+                        if(updateProducts){
+                            updateProducts.map(product=>{
+                                const { _id, ...forUpdate } = product;
+                                axiosSecure.patch(`/updateProductsAfterSale/${_id}`, forUpdate)
+                        .then(res=>{
+                            console.log(res.data)
+                            if(res.data.modifiedCount){
+                                refetch()
+                            }
+                        })
+                            })
+                        }
+                        
+                        setSelectedProducts([])
+                    }
+                })
         }
-        console.log(sale)
     }
-    
+    // update the real product in db
+
+
+
     return (
         <div className='pt-20 container mx-auto '>
             <div className=" flex flex-col xl:flex-row gap-5">
@@ -451,7 +493,7 @@ const POS = () => {
                             </div>
                         </div>
                         <div className="p-2 bg-red-400 bg-opacity-90 text-white font-bold text-2xl rounded-b-lg text-center">
-                            <p>Grand Total :{grandTotal}</p>
+                            <p>Grand Total :{grandTotal.toFixed(2)}</p>
                         </div>
                         <div className="flex justify-items-center gap-3">
                             {/* cash */}
@@ -474,11 +516,11 @@ const POS = () => {
                         </div>
                         <div className="w-full">
 
-                            <button type='submit' className={`${checkCheckout ? ' ':""}  w-full relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-400 ease-out border-2 border-red-400 rounded-lg shadow-md group`}>
+                            <button type='submit' className={`${checkCheckout ? ' ' : ""}  w-full relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-400 ease-out border-2 border-red-400 rounded-lg shadow-md group`}>
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-red-400 opacity-90 group-hover:translate-x-0 ease">
                                     {
-                                        checkCheckout  ? <><span className='pr-2'>Checkout</span><span className="loading loading-dots loading-md"></span></> :
-                                        <><span className='pr-2'>Please Select Product</span></>
+                                        checkCheckout ? <><span className='pr-2'>Checkout</span><span className="loading loading-dots loading-md"></span></> :
+                                            <><span className='pr-2'>Please Select Product</span></>
                                     }
                                 </span>
                                 <span className="absolute flex items-center justify-center w-full h-full text-red-400 transition-all duration-300 transform group-hover:translate-x-full ease disabled">Checkout</span>
