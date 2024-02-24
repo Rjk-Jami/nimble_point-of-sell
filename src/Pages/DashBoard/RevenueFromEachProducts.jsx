@@ -50,13 +50,11 @@ const RevenueFromEachProducts = () => {
         x: {
           show: false
         },
-       
         y: {
-          
           title: {
             formatter: function (val, opt) {
-        return `${opt.w.globals.labels[opt.dataPointIndex]}:${val}`;
-      }
+              return opt.w.globals.labels[opt.dataPointIndex] + ":" 
+            },
           }
         }
         

@@ -1,10 +1,14 @@
 import React from 'react';
+import useProducts from '../../hooks/useProducts';
+import { NavLink } from 'react-router-dom';
 
 const StockAlertTable = () => {
-    return (
-        <div className='overflow-x-autos'>
+    const { products, isLoading, error, refetch } = useProducts()
+    const alertProducts = products?.filter(product => product.stock <= 20);
+        return (
+        <div className='overflow-x-auto h-44 scrollbar'>
             <div className="overflow-x-auto">
-                <table className="table">
+                <table className="table table-pin-rows">
                     {/* head */}
                     <thead>
                         <tr>
@@ -18,13 +22,17 @@ const StockAlertTable = () => {
                     <tbody>
 
 
-                        <tr className="hover:bg-red-50">
+                        {
+                            alertProducts?.map(product=>
+                                <tr className="hover:bg-red-50">
 
-                            <td>abh1545</td>
-                            <td>Monitor</td>
-                            <td>40</td>
-                            <td><button className='badge-lg rounded-lg bg-red-100 hover:bg-red-300 hover:text-white text-sm font-bold'>Order Now</button></td>
+                            <td>{product.code}</td>
+                            <td>{product.name}</td>
+                            <td className='text-red-400 font-bold'>{product.stock}</td>
+                            <td><NavLink to={`/updateProduct/${product._id}`} className='badge-lg rounded-lg bg-red-200 hover:bg-red-300 hover:text-white text-sm font-bold'>Order Now</NavLink></td>
                         </tr>
+                            )
+                        }
 
                     </tbody>
                 </table>
