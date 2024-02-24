@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Overview1 from './Overview1';
 import TopSellingP from './topSellingP';
 import RevenueFromEachProducts from './RevenueFromEachProducts';
@@ -6,14 +6,31 @@ import StockAlertTable from './StockAlertTable';
 import TransactionsSummary from './TransactionsSummary';
 import RecentSales from './RecentSales';
 import { NavContext } from '../../Provider/ActiveNavProvider';
+import useSales from '../../hooks/useSales';
 
 
 const DashBoard = () => {
     const { nav, setNav } = useContext(NavContext)
+    const { sales, isLoading, error,refetch  } = useSales()
+const [salesByCashRatio, setSalesByCashRatio] = useState([])
+const [salesByCardRatio, setSalesByCardRatio] = useState([])
     useEffect(() => {
         setNav('/')
+        const salesByCash = sales?.filter(sale=>sale.paymentMethod === "CASH")
+        const cashRatio = salesByCash ? salesByCash.length / sales.length : 0;
 
-    }, [])
+        if(cashRatio){
+            setSalesByCashRatio(cashRatio)
+        }
+        const salesByCard = sales?.filter(sale=>sale.paymentMethod === "CARD")
+        const cardRatio = salesByCard ? salesByCard.length / sales.length : 0;
+        if(cardRatio){
+            setSalesByCardRatio(cardRatio)
+        }
+    }, [sales])
+    // console.log(salesByCashRatio*100, "salesByCash")
+    // console.log(salesByCardRatio*100,"salesByCard")
+
     return (
         <>
             <div className=" mt-20 container mx-auto">
@@ -51,10 +68,10 @@ const DashBoard = () => {
                         <div className="flex flex-col md:flex-row   items-center  justify-center">
                             <div className="">
 
-                                <TransactionsSummary name={"Cash"} value={10}></TransactionsSummary>
+                                <TransactionsSummary name={"Cash"} value={(salesByCashRatio*100).toFixed(2)}></TransactionsSummary>
                             </div>
                             <div className="">
-                                <TransactionsSummary name={"Card"} value={50}></TransactionsSummary>
+                                <TransactionsSummary name={"Card"} value={(salesByCardRatio*100).toFixed(2)}></TransactionsSummary>
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ const StockAlertTable = () => {
                             <th className='uppercase'>Code</th>
                             <th className='uppercase'>Product</th>
                             <th className='uppercase'>Quantity</th>
-                            <th className='uppercase'></th>
+                            <th className='uppercase'>action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +29,7 @@ const StockAlertTable = () => {
                             <td>{product.code}</td>
                             <td>{product.name}</td>
                             <td className='text-red-400 font-bold'>{product.stock}</td>
-                            <td><NavLink to={`/updateProduct/${product._id}`} className='badge-lg rounded-lg bg-red-200 hover:bg-red-300 hover:text-white text-sm font-bold'>Order Now</NavLink></td>
+                            <td><NavLink to={`/updateProduct/${product._id}`} className='badge-lg rounded-lg bg-red-200 hover:bg-red-300 hover:text-white text-sm font-bold'>Order</NavLink></td>
                         </tr>
                             )
                         }
