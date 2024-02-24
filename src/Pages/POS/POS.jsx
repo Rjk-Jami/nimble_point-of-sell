@@ -34,7 +34,9 @@ const POS = () => {
     // State for selected products
     const [selectedProducts, setSelectedProducts] = useState([]);
     //reference 
-    const { reference } = useGenerator()
+    const [updateTrigger, setUpdateTrigger] = useState(false); // State variable for triggering updates
+
+    const { reference } = useGenerator(updateTrigger)
 
     //Payment Method
     const [paymentMethod, setPaymentMethod] = useState('CASH')
@@ -276,6 +278,7 @@ const POS = () => {
                 discount: discount,
                 coupon: coupon && coupon,
                 revenue: grandTotal,
+                paymentMethod:paymentMethod,
                 saleDate: moment().format('L')
             })
                 .then(data => {
@@ -304,6 +307,8 @@ const POS = () => {
                             console.log(res.data)
                             if(res.data.modifiedCount){
                                 refetch()
+                                reset()
+                                setUpdateTrigger(!updateTrigger)
                             }
                         })
                             })
@@ -340,21 +345,7 @@ const POS = () => {
                         </div>
                     </div>
                     <div className=" p-2 bg-red-400 bg-opacity-90 text-white rounded-t-lg">
-                        {
-                            (!classNameForCategory && !classNameForBrand && !classNameForSales) && <p className='text-xl font-semibold'>Products: All</p>
-                        }
-                        {
-                            (classNameForCategory) &&
-                            <p className='text-xl font-semibold'>Products: {selectedCategory}</p>
-                        }
-                        {
-                            (classNameForBrand) &&
-                            <p className='text-xl font-semibold'>Products: {selectedBrand}</p>
-                        }
-                        {
-                            (classNameForSales) &&
-                            <p className='text-xl font-semibold'>Products: Top Sales</p>
-                        }
+                        <p className='text-xl font-bold text-center '>Products</p>
 
                     </div>
                     {/* products */}

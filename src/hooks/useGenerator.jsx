@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from "react";
 
 
-const useGenerator = () => {
+const useGenerator = (updateDependency) => {
     const [productCode, setProductCode] = useState('');
     const [reference, setReference] = useState('');
 
@@ -19,7 +19,7 @@ useEffect(()=>{
     let randomReference = Math.floor(Math.random() * 1000000)
     setReference(randomReference)
 
-},[])
+},[updateDependency])
 
     return {productCode,reference}
 };

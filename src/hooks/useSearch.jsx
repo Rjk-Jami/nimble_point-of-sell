@@ -1,12 +1,14 @@
 import { useState, useRef } from 'react';
 import axios from 'axios';
 import useProducts from './useProducts';
+import useSales from './useSales';
 
 const useSearch = () => {
   const { products, isLoading, error, refetch } = useProducts()
   const [newProducts, setNewProducts] = useState([])
   const [noResult, setNoResult] = useState("")
-
+  const { sales } = useSales()
+  const [newSales, setNewSales] = useState([])
 
   const handleKeyUp = (event) => {
     if (event?.target?.value) {
@@ -26,25 +28,28 @@ const useSearch = () => {
     }
   }
   const handleKeyUpCode = (event) => {
-    if (event?.target?.value) {
-      const searchResults = products.filter(product => product.code.toLowerCase().includes(event?.target?.value.toLowerCase()))
-      console.log(searchResults)
+    const searchValue = event?.target?.value;
+    console.log(searchValue);
+  
+    if (searchValue) {
+      const searchResults = sales?.filter(product => {
+        return parseInt(product.reference) === parseInt(searchValue);
+      });
+      console.log(searchResults);
+  
       if (searchResults.length !== 0) {
-        setNewProducts(searchResults)
-        setNoResult("")
+        setNewSales(searchResults);
+        setNoResult("");
+      } else {
+        setNoResult("No Data Found!");
+        setNewSales([]);
       }
-      else {
-        setNoResult("No Data Found!")
-        setNewProducts([])
-      }
-    }
-    else {
-      setNewProducts(products)
+    } else {
+      setNewSales(sales);
     }
   }
 
-
-  return { handleKeyUp, newProducts, setNewProducts, noResult ,handleKeyUpCode};
+  return { handleKeyUp, newProducts, setNewProducts, noResult, handleKeyUpCode, newSales, setNewSales };
 };
 
 export default useSearch;

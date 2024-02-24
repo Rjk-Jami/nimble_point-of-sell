@@ -13,7 +13,7 @@ import { NavContext } from '../../../Provider/ActiveNavProvider';
 
 const SideNavBar = ({ sideBar }) => {
     const { nav, setNav} = useContext(NavContext)
-    console.log(nav, "side")
+    // console.log(nav, "side")
     const classForSidebarXl = "bg-red-100 mx-7 md:w-40 md:py-5  md:px-4  rounded-lg hover:bg-red-300 hover:text-white  hover:duration-300 hover:rounded-lg "
     const classForSidebarXlActive = "bg-red-400 mx-7 md:w-40 md:py-5 text-white   md:px-4  rounded-lg "
     
@@ -25,11 +25,11 @@ const SideNavBar = ({ sideBar }) => {
 
     return (
         <div>
-            <div className={`  mt-16 transition-transform bg-red-50 ${sideBar ? "translate-x-0  " : "-translate-x-full absolute md:translate-x-0   md:hidden"
+            <div className={` mt-16 transition-transform bg-red-50 ${sideBar ? "translate-x-0  " : "-translate-x-full absolute md:translate-x-0   md:hidden"
                 }   text-4xl  overflow-auto scrollbar h-full fixed  top-[0px]  md:top-[0px] lg:top-[6px] xl:top-1 left-0 z-10`}
                 style={{ height: 'calc(100vh - 4rem)', position: 'fixed', left: '0', zIndex: '10' }}
             >
-                <ul className='flex flex-col mx-3 text-gray-600 flex-grow '>
+                <ul className='flex flex-col mx-3 text-gray-600 flex-grow  '>
 
                     <NavLink to="/"
                         className={({ isActive }) => isActive ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
@@ -41,20 +41,14 @@ const SideNavBar = ({ sideBar }) => {
                         <li className=""><LuBox></LuBox></li>
                     </NavLink>
 
-                    <NavLink to="/adjustment"
-                        className={({ isActive }) => isActive || (nav === "/adjustment") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
-                        <li className=""><TbAdjustmentsCog></TbAdjustmentsCog></li>
-                    </NavLink>
+                    
 
                     <NavLink to="/expenses"
                         className={({ isActive }) => isActive || (nav === "/expenses") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
                         <li className=""><RiWallet3Line></RiWallet3Line></li>
                     </NavLink>
 
-                    <NavLink to="/purchases"
-                        className={({ isActive }) => isActive || (nav === "/purchases") ? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
-                        <li className=""><MdOutlineShoppingBag></MdOutlineShoppingBag></li>
-                    </NavLink>
+                    
 
                     <NavLink to="/sales"
                         className={({ isActive }) => isActive || (nav === "/sales")? `${classForSideBarMdActive}` : `${classForSideBarMd}`} >
@@ -80,10 +74,10 @@ const SideNavBar = ({ sideBar }) => {
             </div>
             <div
                 id='xl'
-                className={`mt-16 transition-transform ${!sideBar ? "md:-translate-x-0" : "-translate-x-full absolute  "
-                    } ease-out duration-300  hidden xl:block  text-4xl  overflow-auto scrollbar fixed  z-10 lg:top-1 `}
+                className={`h-screen pt-16 transition-transform ${!sideBar ? "md:-translate-x-0" : "-translate-x-full absolute  "
+                    } ease-out duration-300  hidden xl:block  text-4xl  overflow-auto scrollbar fixed  lg:top-1 `}
             >
-                <ul className=' text-gray-600 h-screen flex flex-col gap-7 items-center my-7 '>
+                <ul className=' text-gray-600  flex flex-col gap-7 items-center my-7 '>
                     <NavLink to="/"
                         className={({ isActive }) => isActive ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
                         <li className="md:flex md:flex-col items-center">
@@ -100,13 +94,7 @@ const SideNavBar = ({ sideBar }) => {
                     </li>
                     </NavLink>
 
-                    <NavLink to="/adjustment"
-                        className={({ isActive }) => isActive || (nav === "/adjustment") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
-                    <li className="md:flex md:flex-col items-center">
-                        <TbAdjustmentsCog></TbAdjustmentsCog>
-                        <p className='  text-2xl font-thin'>Adjustments</p>
-                    </li>
-                    </NavLink>
+                    
 
                     <NavLink to="/expenses"
                         className={({ isActive }) => isActive || (nav === "/expenses") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
@@ -116,13 +104,7 @@ const SideNavBar = ({ sideBar }) => {
                     </li>
                     </NavLink>
 
-                    <NavLink to="/purchases"
-                        className={({ isActive }) => isActive || (nav === "/purchases") ? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >
-                    <li className="md:flex md:flex-col items-center">
-                        <MdOutlineShoppingBag></MdOutlineShoppingBag>
-                        <p className=' text-2xl font-thin'>Purchases</p>
-                    </li>
-                    </NavLink>
+                    
 
                     <NavLink to="/sales"
                         className={({ isActive }) => isActive  || (nav === "/sales")? `${classForSidebarXlActive}` : `${classForSidebarXl}`} >

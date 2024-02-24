@@ -11,6 +11,9 @@ import Login from "../Pages/Login/Login";
 import UpdateProduct from "../Pages/Products/UpdateProduct";
 import ProductDetails from "../Pages/Products/productDetails";
 import POS from "../Pages/POS/POS";
+import Expenses from "../Pages/Expenses/Expenses";
+import Sales from "../Pages/Sales/Sales";
+import SalesDetails from "../Pages/Sales/salesDetails";
 
 
   const router = createBrowserRouter([
@@ -43,14 +46,18 @@ import POS from "../Pages/POS/POS";
             path: "/POS",
             element:<POS></POS>
           },
-          // {
-          //   path: "/login",
-          //   element: <Login></Login>
-          // },
-          // {
-          //   path: "/signUp",
-          //   element: <SignUp></SignUp>
-          // },
+          {
+            path: "/expenses",
+            element:<Expenses></Expenses>
+          },
+          {
+            path: "/sales",
+            element:<Sales></Sales>
+          },
+          {
+            path: "/salesDetails/:id",
+            element: <SalesDetails></SalesDetails>
+          }
         ],
         
       },

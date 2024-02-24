@@ -27,12 +27,7 @@ const ProductDetails = () => {
                         <table className="table table-zebra  table-lg table-pin-rows table-pin-cols">
                             {/* head */}
                             <thead>
-                                <tr>
-
-                                    <th className='uppercase'>Image</th>
-                                    <th className='uppercase'>Name</th>
-
-                                </tr>
+                                
                             </thead>
                             <tbody className=''>
 

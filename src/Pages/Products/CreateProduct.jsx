@@ -13,7 +13,9 @@ import { NavLink, Navigate } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const CreateProduct = () => {
-    const { productCode } = useGenerator()
+    const [updateTrigger, setUpdateTrigger] = useState(false); // State variable for triggering updates
+
+    const { productCode } = useGenerator(updateTrigger)
     const [selectedOption, setSelectedOption] = useState('');
     const [error, setError] = useState(false);
     const { imageUrl, setImageUrl } = useContext(GlobalVariableContext)
@@ -24,7 +26,7 @@ const CreateProduct = () => {
         setImageUrl('')
     }, [])
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-    console.log(imageUrl, "imageUrl")
+    // console.log(imageUrl, "imageUrl")
 
 
     // category start select
@@ -80,10 +82,10 @@ const CreateProduct = () => {
         }
         if (!data.image) {
             setError(true)
-            console.log(error)
+            // console.log(error)
         }
 
-        console.log(data)
+        // console.log(data)
 
         let createProduct = {
             name: data.name,
@@ -94,9 +96,10 @@ const CreateProduct = () => {
             cost: data.cost,
             price: data.price,
             stock: data.stock,
-            createDate: data.create
+            createDate: data.create,
+            sales: 0
         }
-        console.log(createProduct)
+        // console.log(createProduct)
         if (createProduct.image === " ") {
             e.preventDefault()
             setError(true)
@@ -104,11 +107,11 @@ const CreateProduct = () => {
         if (createProduct?.image !== undefined) {
             axiosSecure.post('/createProduct', createProduct)
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     setError(false)
                     reset()
                     setImageUrl('')
-
+                    setUpdateTrigger(!updateTrigger)
 
                     // need to add swift
                 })

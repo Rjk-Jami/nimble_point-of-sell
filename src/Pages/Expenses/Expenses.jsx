@@ -11,23 +11,32 @@ import { NavContext } from '../../Provider/ActiveNavProvider';
 import useProducts from '../../hooks/useProducts';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast, { Toaster } from 'react-hot-toast';
-
-const Products = () => {
+const Expenses = () => {
     const { nav, setNav } = useContext(NavContext)
     const { handleKeyUp, newProducts, setNewProducts, noResult } = useSearch();
     const { products, isLoading, error, refetch } = useProducts()
     const searchInputRef = useRef(null)
     const [axiosSecure] = useAxiosSecure()
+const [totalExpense, setTotalExpense] = useState(0)
+    useEffect(() => {
+        setNewProducts(products)
+        
+        
+
+    }, [products])
     useEffect(() => {
         setNav('/')
 
     }, [])
+    // total Expense
     useEffect(() => {
-        setNewProducts(products)
-
-    }, [products])
-
-
+        let totalExpense = 0;
+        products?.map(product => {
+            const total = product.price * (product.sales + product.stock);
+            totalExpense += total; 
+        });
+        setTotalExpense(totalExpense);
+    }, [products]);
 
     
     const handleDelete = (id) => {
@@ -45,7 +54,7 @@ const Products = () => {
     return (
         <div className='mt-20 container mx-auto '>
 
-            <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Products List : {products?.length}</h1>
+            <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Total Expense : {(totalExpense).toFixed(2)}</h1>
 
             {/* product nav */}
             <div className="mt-20 px-5 lg:px-5 xl:px-0">
@@ -66,7 +75,7 @@ const Products = () => {
                         </Button>
                         <Button link={'/createProduct'}>
                             <span className='flex items-center gap-2'>
-                                <span className="relative group-hover:text-white font-semibold">Create Product</span>
+                                <span className="relative group-hover:text-white font-semibold">Create Expense</span>
                                 <span className="relative group-hover:text-white"><IoMdAddCircleOutline />
                                 </span>
                             </span>
@@ -78,19 +87,20 @@ const Products = () => {
 
                 <div className="bg-white p-5 bg-opacity-100 relative">
                     <div className="overflow-x-auto scrollbar" >
-                        <table className="table  table-xs table-pin-rows table-pin-cols">
+                        <table className="table  table-md table-pin-rows table-pin-cols">
                             {/* head */}
                             <thead>
                                 <tr>
 
-                                    <th className='uppercase'>Image</th>
-                                    <th className='uppercase'>Name</th>
+                                    <th className='uppercase'>Date</th>
                                     <th className='uppercase'>Code</th>
+                                    <th className='uppercase'>name</th>
+                                    <th className='uppercase'>Total</th>
                                     <th className='uppercase'>Category</th>
-                                    <th className='uppercase'>Brand</th>
-                                    <th className='uppercase'>Price</th>
-                                    <th className='uppercase'>Sales</th>
+                                    <th className='uppercase'>Supplier</th>
+                                    <th className='uppercase'>Unit Price</th>
                                     <th className='uppercase'>Stock</th>
+                                    <th className='uppercase'>Total Expense</th>
                                     <th className='uppercase'>action</th>
                                 </tr>
                             </thead>
@@ -99,21 +109,18 @@ const Products = () => {
 
                                 {
                                     newProducts?.map(product => <tr className="hover:bg-red-50">
-                                        <td className=''>
-                                            <img className='w-10 h-10 md:w-20 md:h-20 ' src={product.image} alt="" />
-
-                                        </td>
-                                        <td className=''>{product.name}</td>
+                                        <td className=''>{product.createDate}</td>
                                         <td className='font-bold'>{product.code}</td>
+                                        <td className='font-bold'>{product.name}</td>
+                                        <td className='font-bold'>{product.stock + product.sales}</td>
                                         <td className=''>{product.category}</td>
                                         <td className=''>{product.brand}</td>
                                         <td className='font-bold'>{product.price}</td>
-                                        <td className='font-bold text-fuchsia-500'>{product.sales}</td>
                                         <td className={`${product?.stock && parseInt(product.stock) < 20 ? "text-red-400" : "text-green-600"} font-bold`}>{product.stock}</td>
-
+                                        <td className='font-bold'>{(product.price * (product.stock + product.sales)).toFixed(2)}</td>
 
                                         <td>
-                                            <div className="flex items-center gap-2 text-lg">
+                                            <div className="flex items-center gap-2 text-lg ">
                                                 <NavLink to={`/productDetails/${product._id}`}>
                                                 < LuEye className='hover:text-red-300 animate-pulse '  ></LuEye>
                                                 </NavLink>
@@ -146,4 +153,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default Expenses;

@@ -14,7 +14,7 @@ const handleLogout = ()=>{
     Logout()
     .then(result=>{
         const loggedUser = result.user
-                console.log("nav", loggedUser)
+                // console.log("nav", loggedUser)
                 
                 navigate(from, { replace: true });
 
@@ -22,13 +22,13 @@ const handleLogout = ()=>{
     
     .catch(error => {
         setIsLoading(false)
-        console.log(error)
+        // console.log(error)
         setError(error.message)
     })
 }
     return (
         <div>
-            <div className="navbar bg-white fixed  z-10 ">
+            <div className="navbar bg-white fixed  z-50 ">
                 <div className="navbar-start space-x-3 relative ">
                     <img className='w-10' src={logo} alt="" />
                     <a className={`${sideBar ? "opacity-100" : "opacity-0 md:opacity-100 "} transition-opacity ease-in-out delay-75 duration-300 text-2xl font-bold `}>
