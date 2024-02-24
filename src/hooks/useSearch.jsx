@@ -13,7 +13,7 @@ const useSearch = () => {
   const handleKeyUp = (event) => {
     if (event?.target?.value) {
       const searchResults = products.filter(product => product.name.toLowerCase().includes(event?.target?.value.toLowerCase()))
-      console.log(searchResults)
+      // console.log(searchResults)
       if (searchResults.length !== 0) {
         setNewProducts(searchResults)
         setNoResult("")
@@ -29,13 +29,13 @@ const useSearch = () => {
   }
   const handleKeyUpCode = (event) => {
     const searchValue = event?.target?.value;
-    console.log(searchValue);
+    // console.log(searchValue);
   
     if (searchValue) {
       const searchResults = sales?.filter(product => {
         return parseInt(product.reference) === parseInt(searchValue);
       });
-      console.log(searchResults);
+      // console.log(searchResults);
   
       if (searchResults.length !== 0) {
         setNewSales(searchResults);

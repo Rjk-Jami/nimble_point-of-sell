@@ -22,7 +22,7 @@ const ImageUpload = () => {
             headers: { 'Content-Type': 'multipart/form-data' }
         })
             .then(response => {
-                console.log("Image uploaded successfully:", response.data.data.url);
+                // console.log("Image uploaded successfully:", response.data.data.url);
                 setImageUrl(response.data.data.url);
                 setError(null);
             })

@@ -39,18 +39,7 @@ const [totalExpense, setTotalExpense] = useState(0)
     }, [products]);
 
     
-    const handleDelete = (id) => {
-        // console.log(id)
-        axiosSecure.delete(`/deleteProduct/${id}`)
-            .then(res => {
-                // console.log(res.data.deletedCount)
-                if (res.data.deletedCount) {
-                    toast.success('Deleted!')
-                    refetch()
-                }
-            })
-
-    }
+   
     return (
         <div className='mt-20 container mx-auto '>
 
@@ -120,14 +109,15 @@ const [totalExpense, setTotalExpense] = useState(0)
                                         <td className='font-bold'>{(product.price * (product.stock + product.sales)).toFixed(2)}</td>
 
                                         <td>
-                                            <div className="flex items-center gap-2 text-lg ">
+                                            <div className="flex items-center gap-2 text-md ">
                                                 <NavLink to={`/productDetails/${product._id}`}>
-                                                < LuEye className='hover:text-red-300 animate-pulse '  ></LuEye>
+                                                <div className="hover:text-red-300 animate-pulse flex items-center gap-1 font-bold">
+                                                < LuEye className=' '  ></LuEye>
+                                                <p>Details</p>
+                                                </div>
                                                 </NavLink>
-                                                <NavLink to={`/updateProduct/${product._id}`}>
-                                                < RiEditLine className='hover:text-red-300 '></RiEditLine>
-                                                </NavLink>
-                                                < LuTrash2 className='hover:text-red-300' onClick={() => handleDelete(product._id)}></LuTrash2>
+                                                
+                                                
                                             </div>
                                         </td>
                                     </tr>)

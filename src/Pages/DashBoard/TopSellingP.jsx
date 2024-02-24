@@ -5,11 +5,12 @@ import {
   ToolboxComponent,
   TooltipComponent,
   LegendComponent
-  
+
 } from 'echarts/components';
 import { PieChart } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
+import useProducts from '../../hooks/useProducts';
 
 echarts.use([
   TitleComponent,
@@ -21,13 +22,16 @@ echarts.use([
   LabelLayout
 ]);
 
-const TopSellingP = ({classN}) => {
+const TopSellingP = ({ classN }) => {
+  const { products, isLoading, error, refetch } = useProducts()
+  const topProducts = products?.sort((a, b) => b.sales - a.sales).slice(0, 15);
+
   useEffect(() => {
     const chartDom = document.getElementById('main');
     const myChart = echarts.init(chartDom);
 
     const option = {
-      
+
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -35,17 +39,17 @@ const TopSellingP = ({classN}) => {
       legend: {
         top: 'bottom'
       },
-      
-      
+
+
       toolbox: {
         show: true,
         feature: {
-          
+
 
           saveAsImage: { show: true }
         }
       },
-    
+
       series: [
         {
           name: 'Top Selling Products',
@@ -56,16 +60,10 @@ const TopSellingP = ({classN}) => {
           itemStyle: {
             borderRadius: 8
           },
-          data: [
-            { value: 40, name: 'rose 1' },
-            { value: 38, name: 'rose 2' },
-            { value: 32, name: 'rose 3' },
-            { value: 30, name: 'rose 4' },
-            { value: 28, name: 'rose 5' },
-            { value: 26, name: 'rose 6' },
-            { value: 22, name: 'rose 7' },
-            { value: 18, name: 'rose 8' }
-          ]
+          data: topProducts?.map(product => ({
+            value: product.sales,
+            name: product.name
+        }))
         }
       ]
     };
@@ -76,7 +74,7 @@ const TopSellingP = ({classN}) => {
     return () => {
       myChart.dispose();
     };
-  }, []);
+  }, [topProducts]);
 
   return <div id="main" className={`${classN}, w-full lg:w-auto xl:max-w-lg mx-auto`} style={{ width: '', height: '600px' }} />;
 };

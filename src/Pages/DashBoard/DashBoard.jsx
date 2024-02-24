@@ -23,15 +23,15 @@ const DashBoard = () => {
                     <Overview1></Overview1>
                 </div>
                 {/*  top selling and Revenue From Each Products */}
-                <div className="flex flex-col md:flex-row mt-6 gap-3 w-full">
-                    <div className="  md:mx-0 relative w-full md:w-2/5 bg-red-100 p-5 bg-opacity-40">
+                <div className="flex flex-col lg:flex-row mt-6 gap-3 w-full">
+                    <div className="  md:mx-0 relative w-full lg:w-2/5 bg-red-100 p-5 bg-opacity-40">
                         <p className='text-2xl lg:text-3xl font-semibold absolute'>Top Selling Products</p>
                         <TopSellingP classN={"w-full"}></TopSellingP>
 
                     </div>
                     <div className=" md:mx-0 relative flex-1  bg-red-100 p-5 bg-opacity-40">
-                        <p className='text-2xl lg:text-3xl font-semibold  left- md:left-24'>Revenue From Each Products</p>
-                        <div className=" ">
+                        <p className='text-2xl lg:text-3xl font-semibold  left- md:left-24'>Revenue Rockstars</p>
+                        <div className="overflow-auto ">
                             <RevenueFromEachProducts></RevenueFromEachProducts>
                         </div>
                     </div>

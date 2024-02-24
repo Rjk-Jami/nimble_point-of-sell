@@ -69,8 +69,8 @@ const UpdateProduct = () => {
     };
     //handle submit
     const onSubmit = (data, e) => {
-        console.log("Selected option:", selectedOption);
-        console.log("Product category:", product?.category);
+        // console.log("Selected option:", selectedOption);
+        // console.log("Product category:", product?.category);
         // Parsing price and stock to integers
         const price = parseInt(data.price);
         const stock = parseInt(data.stock);
@@ -86,7 +86,7 @@ const UpdateProduct = () => {
 
         // Setting category based on conditions
         data.category = selectedOption ? selectedOption.value : (product && product.category);
-        console.log(product?.category);
+        // console.log(product?.category);
 
         // Setting image based on conditions
         data.image = imageUrl !== " " ? imageUrl : (product && product.image);

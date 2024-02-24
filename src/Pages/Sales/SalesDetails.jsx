@@ -15,7 +15,7 @@ const SalesDetails = () => {
         if (sale && products) {
             if (sale.products.length > 1) {
                 const productIds = sale.products.map(saleProduct => saleProduct.id);
-                console.log(productIds, "productIds")
+                // console.log(productIds, "productIds")
 
                 const allSaleProductsNames = products.filter(product => productIds.includes(product._id));
                 setSaleProducts(allSaleProductsNames);
@@ -35,7 +35,7 @@ const SalesDetails = () => {
         <div className='mt-20 container mx-auto  '>
             <div className=" flex items-center  mb-6 gap-2">
                 <div className="relative px-5">
-                    <NavLink to={'/products'}><FaArrowLeft className='text-3xl pt-1 text-red-400 hover:text-red-300 '></FaArrowLeft>
+                    <NavLink to={'/sales'}><FaArrowLeft className='text-3xl pt-1 text-red-400 hover:text-red-300 '></FaArrowLeft>
                     </NavLink>
                 </div>
                 <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold '>Product Details : {sale?.reference}</h1>
@@ -119,12 +119,12 @@ const SalesDetails = () => {
                                 <p>total: {(sale?.totalPrice)}</p>
                             </div>
                         </div>
-                        <div className="flex flex-col justify-end">
-                            <div className="">
+                        <div className="flex flex-col  ">
+                            <div className="text-right">
                                 <p>Discount: {sale?.discount}</p>
                             </div>
 
-                            <div className="">
+                            <div className="text-right">
                                 <p>Grand Total: {(sale?.revenue)}</p>
                             </div>
                         </div>

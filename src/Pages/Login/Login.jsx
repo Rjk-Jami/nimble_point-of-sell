@@ -20,13 +20,13 @@ const Login = () => {
     },[user,navigate])
 
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         // Perform login logic here
 
         SignInWithEmailAndPass(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user
-                console.log(loggedUser)
+                // console.log(loggedUser)
 
 
                 setError('')
@@ -34,7 +34,7 @@ const Login = () => {
             })
             .catch(error => {
 
-                console.log(error)
+                // console.log(error)
                 setError(error.message)
             })
     }

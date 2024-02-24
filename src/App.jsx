@@ -14,7 +14,7 @@ const App = () => {
   //need to change -=========================================
   const inLog = localStorage.getItem('inLog')
   const inLogToken = import.meta.env.VITE_INLOGTOKEN
-  console.log(inLogToken, "inLogToken")
+  // console.log(inLogToken, "inLogToken")
   // size controller for chart, so that it reload in every media breakpoint.
 
   useEffect(() => {

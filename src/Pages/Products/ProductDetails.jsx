@@ -7,7 +7,7 @@ const ProductDetails = () => {
     const { products, isLoading, refetch } = useProducts()
     let { id } = useParams();
     const product = products?.find((product) => product._id === id)
-    console.log(product)
+    // console.log(product)
 
     return (
         <div className='mt-20 container mx-auto  '>
