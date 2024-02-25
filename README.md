@@ -18,12 +18,12 @@
     
     
 
-2. Dashboard
+2. ## Dashboard
     * Top Selling Products
     * Revenue Rockstars
     * Stock Alert
     * Transactions Summary
-3. Products
+3. ## Products
     * Search With Name
     * Create Products
     * Product Details
@@ -31,23 +31,23 @@
     * Product Delete
     * Table with all Products
 
-4. Expense
+4. ## Expense
     * Search With Code
     * Create Expense
     * Product Details
     * Table with all Expense
 
-5. Sales
+5. ## Sales
     * Search With Reference
     * Create sales
     * Product Details
     * Table with all Sales
-6. People
+6. ## People
     * Table with all customers
-7. Settings
+7. ## Settings
     * Table with Manage User
     * Edit Payment Gateway
     * Change System Identity
 
-8. Reports
+8. ## Reports
 
