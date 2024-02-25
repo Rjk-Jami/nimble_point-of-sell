@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
                         localStorage.setItem('access-token', data.data.token)
                         //need to change -=========================================
 
-                        localStorage.setItem('inLog', 'nimblePos-01786076080')
+                        localStorage.setItem('inLog', import.meta.VITE_INLOG)
                         
                         
                     })
