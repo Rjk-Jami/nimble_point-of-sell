@@ -50,7 +50,7 @@ const Search = ({ handleKeyUp, searchInputRef, handleSelect, placeholder }) => {
                                 <span className="loading loading-spinner loading-xl absolute text-red-400 h-full inset-y-0 left-0  ms-3"></span>
                             </div> : <FaSearch className='h-full text-xl absolute  inset-y-0 left-0  ms-3' />
                         }
-                        <input value={inputValue} onChange={handleInputChange} onSelect={handleSelect ? handleSelect : () => doNothing()} type="text" onKeyUp={handleKeyUp} ref={searchInputRef} className="w-full input  input-bordered border-red-300 focus:outline-none focus:bg-red-100 focus:bg-opacity-40 join-item bg-transparent ps-10" placeholder={() => placeholder()} />
+                        <input value={inputValue} onChange={handleInputChange} onSelect={handleSelect ? handleSelect : () => doNothing()} type="text" onKeyUp={handleKeyUp} ref={searchInputRef} className="w-full input  input-bordered border-red-300 focus:outline-none focus:bg-red-100 focus:bg-opacity-40 join-item bg-transparent ps-10" placeholder={placeholder} />
                         <div className="pe-8  hidden  absolute lg:flex  items-center gap-1 inset-y-0 right-0  text-xs opacity-30 mx-2">
                             <kbd className="kbd">ctrl</kbd>
                             <p>+</p>
