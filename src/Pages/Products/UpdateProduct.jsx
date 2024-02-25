@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { GlobalVariableContext } from '../../Provider/GlobalVariableProvider';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const UpdateProduct = () => {
     const { products, isLoading, refetch } = useProducts()
@@ -121,7 +122,9 @@ const UpdateProduct = () => {
 
     return (
         <div className='mt-20 container mx-auto  '>
-
+<Helmet>
+        <title>Nimble-POS -Product-Update</title>
+      </Helmet>
             <div className=" flex items-center  mb-6 gap-2">
                 <div className="relative">
                     <NavLink to={'/products'}><FaArrowLeft className='text-3xl pt-1 text-red-400 hover:text-red-300 '></FaArrowLeft>

@@ -26,7 +26,7 @@ const StockAlertTable = () => {
                             alertProducts?.map(product=>
                                 <tr className="hover:bg-red-50">
 
-                            <td>{product.code}</td>
+                            <td className='font-bold'>{product.code}</td>
                             <td>{product.name}</td>
                             <td className='text-red-400 font-bold'>{product.stock}</td>
                             <td><NavLink to={`/updateProduct/${product._id}`} className='badge-lg rounded-lg bg-red-200 hover:bg-red-300 hover:text-white text-sm font-bold'>Order</NavLink></td>

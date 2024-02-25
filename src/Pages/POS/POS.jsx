@@ -12,10 +12,11 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import { GlobalVariableContext } from '../../Provider/GlobalVariableProvider';
 import moment from 'moment';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 const POS = () => {
     const { user } = useContext(AuthContext)
     const { products, isLoading, error, refetch } = useProducts()
-    const { handleKeyUp, newProducts, setNewProducts, noResult, handleKeyUpCode } = useSearch();
+    const { handleKeyUp, newProducts, setNewProducts, noResult, handleKeyUpCode,inputLoad } = useSearch();
     const searchInputRef = useRef(null)
     const [axiosSecure] = useAxiosSecure()
     //category state
@@ -53,7 +54,7 @@ const POS = () => {
 
     useEffect(() => {
         setNewProducts(products)
-    }, [products])
+    }, [products,inputLoad])
     // all category name
     const allCategoryNames = [...new Set(products?.map(product => product.category))];
     // console.log(allCategoryNames)
@@ -304,7 +305,7 @@ const POS = () => {
                                 const { _id, ...forUpdate } = product;
                                 axiosSecure.patch(`/updateProductsAfterSale/${_id}`, forUpdate)
                         .then(res=>{
-                            console.log(res.data)
+                            // console.log(res.data)
                             if(res.data.modifiedCount){
                                 refetch()
                                 reset()
@@ -325,12 +326,15 @@ const POS = () => {
 
     return (
         <div className='pt-20 container mx-auto '>
+            <Helmet>
+        <title>Nimble-POS</title>
+      </Helmet>
             <div className=" flex flex-col xl:flex-row gap-5">
                 {/* left */}
                 <div className="w-full xl:w-1/2 bg-white p-3">
                     {/* search */}
                     <div className="">
-                        <Search handleSelect={handleSelect} handleKeyUp={handleKeyUpCode} searchInputRef={searchInputRef} ></Search>
+                        <Search  placeholder={"Search With Name" } handleSelect={handleSelect} handleKeyUp={handleKeyUp} searchInputRef={searchInputRef} ></Search>
                     </div>
                     {/* filter */}
                     <div className="flex justify-items-center gap-3">
@@ -383,7 +387,7 @@ const POS = () => {
 
                             <div className="relative flex-1">
                                 <label htmlFor="name" className="block text-md font-medium text-gray-700">
-                                    Name
+                                    Customer
                                 </label>
                                 <input
                                     placeholder='Customer'
@@ -484,7 +488,7 @@ const POS = () => {
                             </div>
                         </div>
                         <div className="p-2 bg-red-400 bg-opacity-90 text-white font-bold text-2xl rounded-b-lg text-center">
-                            <p>Grand Total :{grandTotal.toFixed(2)}</p>
+                            <p>Grand Total : {grandTotal.toFixed(2)}</p>
                         </div>
                         <div className="flex justify-items-center gap-3">
                             {/* cash */}

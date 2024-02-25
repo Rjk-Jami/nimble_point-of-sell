@@ -2,6 +2,7 @@ import React from 'react';
 import useProducts from '../../hooks/useProducts';
 import { NavLink, useParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const ProductDetails = () => {
     const { products, isLoading, refetch } = useProducts()
@@ -11,6 +12,9 @@ const ProductDetails = () => {
 
     return (
         <div className='mt-20 container mx-auto  '>
+            <Helmet>
+        <title>Nimble-POS -Product-Details</title>
+      </Helmet>
             <div className=" flex items-center  mb-6 gap-2">
                 <div className="relative px-5">
                     <NavLink to={'/products'}><FaArrowLeft className='text-3xl pt-1 text-red-400 hover:text-red-300 '></FaArrowLeft>

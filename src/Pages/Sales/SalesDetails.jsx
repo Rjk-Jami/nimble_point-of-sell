@@ -3,6 +3,7 @@ import useProducts from '../../hooks/useProducts';
 import { NavLink, useParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import useSales from '../../hooks/useSales';
+import { Helmet } from 'react-helmet-async';
 
 const SalesDetails = () => {
     const { products } = useProducts()
@@ -27,12 +28,15 @@ const SalesDetails = () => {
             }
 
 
-            // Do whatever you want with allSaleProductsNames here
+            
         }
     }, [sale, products]);
     // console.log(saleProducts)
     return (
         <div className='mt-20 container mx-auto  '>
+            <Helmet>
+        <title>Nimble-POS -Sales-Details</title>
+      </Helmet>
             <div className=" flex items-center  mb-6 gap-2">
                 <div className="relative px-5">
                     <NavLink to={'/sales'}><FaArrowLeft className='text-3xl pt-1 text-red-400 hover:text-red-300 '></FaArrowLeft>
@@ -116,7 +120,7 @@ const SalesDetails = () => {
                                 <p>Coupon: {sale?.coupon}</p>
                             </div>
                             <div className="">
-                                <p>total: {(sale?.totalPrice)}</p>
+                                <p>total: {sale?.totalPrice.toFixed(2)}</p>
                             </div>
                         </div>
                         <div className="flex flex-col  ">
@@ -125,7 +129,7 @@ const SalesDetails = () => {
                             </div>
 
                             <div className="text-right">
-                                <p>Grand Total: {(sale?.revenue)}</p>
+                                <p>Grand Total: {sale?.revenue.toFixed(2)}</p>
                             </div>
                         </div>
                     </div>

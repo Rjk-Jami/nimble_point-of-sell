@@ -12,20 +12,21 @@ import useProducts from '../../hooks/useProducts';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast, { Toaster } from 'react-hot-toast';
 import useSales from '../../hooks/useSales';
+import { Helmet } from 'react-helmet-async';
 
 const Sales = () => {
     const { nav, setNav } = useContext(NavContext)
-    const { handleKeyUpCode ,newSales, setNewSales ,noResult} = useSearch();
-    const { sales, isLoading, error,refetch  } = useSales()
+    const { handleKeyUpCode, newSales, setNewSales, noResult ,inputLoad} = useSearch();
+    const { sales, isLoading, error, refetch } = useSales()
     const searchInputRef = useRef(null)
     const [axiosSecure] = useAxiosSecure()
-const [totalSales, setTotalSales] = useState(0)
+    const [totalSales, setTotalSales] = useState(0)
     useEffect(() => {
         setNewSales(sales)
-        
-        
 
-    }, [sales])
+
+
+    }, [sales,inputLoad])
     useEffect(() => {
         setNav('/')
 
@@ -35,16 +36,22 @@ const [totalSales, setTotalSales] = useState(0)
         let totalSales = 0;
         sales?.forEach(product => {
             const total = product.revenue
-            totalSales += total; 
+            totalSales += total;
         });
         setTotalSales(totalSales);
     }, [sales]);
 
-    
-    
+    const handleSelect = () => {
+
+        setNewSales(sales)
+        
+    }
+
     return (
         <div className='mt-20 container mx-auto '>
-
+            <Helmet>
+        <title>Nimble-POS -Sales</title>
+      </Helmet>
             <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Total Sales : {(totalSales).toFixed(2)}</h1>
 
             {/* product nav */}
@@ -52,13 +59,13 @@ const [totalSales, setTotalSales] = useState(0)
                 <div className="flex gap-3 flex-col  lg:flex-row justify-between">
                     <div className="w-full lg:w-1/3 flex">
                         <div className="flex-1">
-                            <Search handleKeyUp={handleKeyUpCode} searchInputRef={searchInputRef} ></Search>
+                            <Search  handleSelect={handleSelect} placeholder={"Search With Reference"} handleKeyUp={handleKeyUpCode} searchInputRef={searchInputRef} ></Search>
                         </div>
 
                     </div>
                     <div className="flex gap-3">
-                        
-                        <Button link={'/'}>
+
+                        <Button link={'/sales'}>
                             <span className='flex items-center gap-2'>
                                 <span className="relative group-hover:text-white font-semibold">Pdf</span>
 
@@ -109,19 +116,19 @@ const [totalSales, setTotalSales] = useState(0)
                                         <td className='font-bold'>{product.discount}</td>
                                         <td className='font-bold'>{product?.coupon}</td>
                                         <td className='font-bold'>{(product.revenue).toFixed(2)}</td>
-                                        
-                                        
+
+
 
                                         <td>
                                             <div className="flex items-center gap-2 text-md ">
                                                 <NavLink to={`/salesDetails/${product._id}`}>
-                                                <div className="hover:text-red-300 animate-pulse flex items-center gap-1 font-bold">
-                                                < LuEye className=' '  ></LuEye>
-                                                <p>Details</p>
-                                                </div>
+                                                    <div className="hover:text-red-300 animate-pulse flex items-center gap-1 font-bold">
+                                                        < LuEye className=' '  ></LuEye>
+                                                        <p>Details</p>
+                                                    </div>
                                                 </NavLink>
-                                                
-                                               
+
+
                                             </div>
                                         </td>
                                     </tr>)

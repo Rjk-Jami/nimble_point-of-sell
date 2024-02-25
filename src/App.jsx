@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const [sideBar, setSideBar] = useState(false)
-  const { user, isLoading } = useContext(AuthContext)
+  const { user, isLoadingAuth } = useContext(AuthContext)
   const location = useLocation()
   //need to change -=========================================
   const inLog = localStorage.getItem('inLog')
@@ -46,7 +46,7 @@ const App = () => {
       mediaQuery1366.removeEventListener('change', handleChange);
     };
   }, []);
-  console.log(sideBar)
+  // console.log(sideBar)
 
   const sideBarF = () => {
     setSideBar(!sideBar)

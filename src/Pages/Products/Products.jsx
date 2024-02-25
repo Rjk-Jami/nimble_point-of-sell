@@ -11,10 +11,11 @@ import { NavContext } from '../../Provider/ActiveNavProvider';
 import useProducts from '../../hooks/useProducts';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast, { Toaster } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Products = () => {
     const { nav, setNav } = useContext(NavContext)
-    const { handleKeyUp, newProducts, setNewProducts, noResult } = useSearch();
+    const { handleKeyUp, newProducts, setNewProducts, noResult ,inputLoad} = useSearch();
     const { products, isLoading, error, refetch } = useProducts()
     const searchInputRef = useRef(null)
     const [axiosSecure] = useAxiosSecure()
@@ -25,7 +26,7 @@ const Products = () => {
     useEffect(() => {
         setNewProducts(products)
 
-    }, [products])
+    }, [products,inputLoad])
 
 
 
@@ -42,9 +43,16 @@ const Products = () => {
             })
 
     }
+    const handleSelect = () => {
+
+        setNewProducts(products)
+        
+    }
     return (
         <div className='mt-20 container mx-auto '>
-
+            <Helmet>
+        <title>Nimble-POS -Product</title>
+      </Helmet>
             <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Products List : {products?.length}</h1>
 
             {/* product nav */}
@@ -52,15 +60,15 @@ const Products = () => {
                 <div className="flex gap-3 flex-col  lg:flex-row justify-between">
                     <div className="w-full lg:w-1/3 flex">
                         <div className="flex-1">
-                            <Search handleKeyUp={handleKeyUp} searchInputRef={searchInputRef} ></Search>
+                            <Search handleSelect={handleSelect} placeholder={"Search With Name" } handleKeyUp={handleKeyUp} searchInputRef={searchInputRef} ></Search>
                         </div>
 
                     </div>
                     <div className="flex gap-3">
                         
-                        <Button link={'/'}>
+                        <Button link={'/products'}>
                             <span className='flex items-center gap-2'>
-                                <span className="relative group-hover:text-white font-semibold">Pdf</span>
+                                <span className="relative group-hover:text-white font-semibold ">Pdf</span>
 
                             </span>
                         </Button>
@@ -78,7 +86,7 @@ const Products = () => {
 
                 <div className="bg-white p-5 bg-opacity-100 relative">
                     <div className="overflow-x-auto scrollbar" >
-                        <table className="table  table-xs table-pin-rows table-pin-cols">
+                        <table className="table  table-sm table-pin-rows table-pin-cols">
                             {/* head */}
                             <thead>
                                 <tr>
@@ -139,7 +147,7 @@ const Products = () => {
             </div>
             {
                 noResult && <div>
-                    <p className='text-2xl text-center '>{noResult}</p>
+                    <p className='text-2xl text-center px-5 lg:px-5 xl:px-0 w-full'>{noResult}</p>
                 </div>
             }
         </div>

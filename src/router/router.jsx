@@ -14,6 +14,9 @@ import POS from "../Pages/POS/POS";
 import Expenses from "../Pages/Expenses/Expenses";
 import Sales from "../Pages/Sales/Sales";
 import SalesDetails from "../Pages/Sales/salesDetails";
+import People from "../Pages/People/People";
+import Settings from "../Pages/Settings/Settings";
+import Reports from "../Pages/Reports/Reports";
 
 
   const router = createBrowserRouter([
@@ -57,7 +60,19 @@ import SalesDetails from "../Pages/Sales/salesDetails";
           {
             path: "/salesDetails/:id",
             element: <SalesDetails></SalesDetails>
-          }
+          },
+          {
+            path: "/people",
+            element: <People></People>
+          },
+          {
+            path: "/settings",
+            element: <Settings></Settings>
+          },
+          {
+            path: "/reports",
+            element: <Reports></Reports>
+          },
         ],
         
       },

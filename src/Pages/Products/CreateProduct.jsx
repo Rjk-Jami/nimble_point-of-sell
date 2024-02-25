@@ -11,9 +11,10 @@ import moment from 'moment';
 import { FaArrowLeft } from "react-icons/fa6";
 import { NavLink, Navigate } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const CreateProduct = () => {
-    const [updateTrigger, setUpdateTrigger] = useState(false); // State variable for triggering updates
+    const [updateTrigger, setUpdateTrigger] = useState(false); // State variable for triggering updates for reference
 
     const { productCode } = useGenerator(updateTrigger)
     const [selectedOption, setSelectedOption] = useState('');
@@ -125,7 +126,9 @@ const CreateProduct = () => {
 
     return (
         <div className='mt-20 container mx-auto  '>
-
+            <Helmet>
+        <title>Nimble-POS -Create-Product</title>
+      </Helmet>
             <div className=" flex items-center  mb-6 gap-2">
                 <div className="relative">
                     <NavLink to={'/products'}><FaArrowLeft className='text-3xl pt-1 text-red-400 hover:text-red-300 '></FaArrowLeft></NavLink>

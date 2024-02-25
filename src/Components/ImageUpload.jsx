@@ -27,7 +27,7 @@ const ImageUpload = () => {
                 setError(null);
             })
             .catch(error => {
-                console.error("Error uploading image:", error);
+                // console.error("Error uploading image:", error);
                 setError("Error uploading image. Please try again.");
                 setImageUrl(null);
             });

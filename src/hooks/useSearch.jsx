@@ -9,6 +9,7 @@ const useSearch = () => {
   const [noResult, setNoResult] = useState("")
   const { sales } = useSales()
   const [newSales, setNewSales] = useState([])
+  const [inputLoad, setInputLoad] = useState(false)
 
   const handleKeyUp = (event) => {
     if (event?.target?.value) {
@@ -29,13 +30,13 @@ const useSearch = () => {
   }
   const handleKeyUpCode = (event) => {
     const searchValue = event?.target?.value;
-    // console.log(searchValue);
-  
+    
     if (searchValue) {
-      const searchResults = sales?.filter(product => {
-        return parseInt(product.reference) === parseInt(searchValue);
+      const searchResults = sales.filter(product => {
+        // Ensure that the reference property is a string before calling toLowerCase
+        const referenceAsString = String(product.reference);
+        return referenceAsString.toLowerCase().includes(searchValue.toLowerCase());
       });
-      // console.log(searchResults);
   
       if (searchResults.length !== 0) {
         setNewSales(searchResults);
@@ -48,8 +49,35 @@ const useSearch = () => {
       setNewSales(sales);
     }
   }
+  const handleKeyUpCodeExpense = (event) => {
+    const searchValue = event?.target?.value;
+    
+    if (searchValue) {
+      const searchResults = products.filter(product => {
+        // Ensure that the reference property is a string before calling toLowerCase
+        const referenceAsString = String(product.code);
+        return referenceAsString.toLowerCase().includes(searchValue.toLowerCase());
+      });
+  
+      if (searchResults.length !== 0) {
+        setNewSales(searchResults);
+        setNoResult("");
+      } else {
+        setNoResult("No Data Found!");
+        setNewSales([]);
+      }
+    } else {
+      setNewSales(products);
+    }
+  }
 
-  return { handleKeyUp, newProducts, setNewProducts, noResult, handleKeyUpCode, newSales, setNewSales };
+  const deleteInput=()=>{
+    setInputLoad(!inputLoad)
+    setNewSales(products)
+    setNewSales(sales)
+  }
+
+  return { handleKeyUp, newProducts, setNewProducts, noResult, handleKeyUpCode, newSales, setNewSales,handleKeyUpCodeExpense ,deleteInput, inputLoad};
 };
 
 export default useSearch;

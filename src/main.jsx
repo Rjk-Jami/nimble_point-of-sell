@@ -14,11 +14,13 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import AuthProvider from './Provider/AuthProvider';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    
+    <HelmetProvider>
      <AuthProvider>
      <ActiveNavProvider>
     <GlobalVariableProvider>
@@ -29,5 +31,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </GlobalVariableProvider>
     </ActiveNavProvider>
      </AuthProvider>
+     </HelmetProvider>
   </React.StrictMode>,
 )

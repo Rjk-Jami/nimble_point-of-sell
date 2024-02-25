@@ -1,7 +1,11 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const ErrorPage = () => {
     return (
+        <><Helmet>
+        <title>Nimble-POS -ErrorPage</title>
+      </Helmet>
         <div>
             <div className="min-h-screen flex flex-grow items-center justify-center bg-gray-50">
                 <div className="rounded-lg bg-white p-8 text-center shadow-xl">
@@ -10,7 +14,7 @@ const ErrorPage = () => {
                     <a href="/" className="mt-4 inline-block rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600"> Go back to Home </a>
                 </div>
             </div>
-        </div>
+        </div></>
     );
 };
 

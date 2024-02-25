@@ -4,12 +4,15 @@ import TopSellingP from './topSellingP';
 import RevenueFromEachProducts from './RevenueFromEachProducts';
 import StockAlertTable from './StockAlertTable';
 import TransactionsSummary from './TransactionsSummary';
-import RecentSales from './RecentSales';
+
 import { NavContext } from '../../Provider/ActiveNavProvider';
 import useSales from '../../hooks/useSales';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 
 const DashBoard = () => {
+    const {user,isLoadingAuth,GoogleLogin,Logout, setIsLoading} = useContext(AuthContext)
     const { nav, setNav } = useContext(NavContext)
     const { sales, isLoading, error,refetch  } = useSales()
 const [salesByCashRatio, setSalesByCashRatio] = useState([])
@@ -33,23 +36,26 @@ const [salesByCardRatio, setSalesByCardRatio] = useState([])
 
     return (
         <>
+        <Helmet>
+        <title>Nimble-POS -Dashboard</title>
+      </Helmet>
             <div className=" mt-20 container mx-auto">
                 {/* overview */}
 
                 <div className="mb-6 ">
-                    <Overview1></Overview1>
+                   {user && <Overview1></Overview1>}
                 </div>
                 {/*  top selling and Revenue From Each Products */}
                 <div className="flex flex-col lg:flex-row mt-6 gap-3 w-full">
                     <div className="  md:mx-0 relative w-full lg:w-2/5 bg-red-100 p-5 bg-opacity-40">
                         <p className='text-2xl lg:text-3xl font-semibold absolute'>Top Selling Products</p>
-                        <TopSellingP classN={"w-full"}></TopSellingP>
+                       {user &&  <TopSellingP classN={"w-full"}></TopSellingP>}
 
                     </div>
                     <div className=" md:mx-0 relative flex-1  bg-red-100 p-5 bg-opacity-40">
                         <p className='text-2xl lg:text-3xl font-semibold  left- md:left-24'>Revenue Rockstars</p>
                         <div className="overflow-auto ">
-                            <RevenueFromEachProducts></RevenueFromEachProducts>
+                           {user && <RevenueFromEachProducts></RevenueFromEachProducts>}
                         </div>
                     </div>
 
@@ -63,8 +69,8 @@ const [salesByCardRatio, setSalesByCardRatio] = useState([])
                         <StockAlertTable></StockAlertTable>
 
                     </div>
-                    <div className="flex-1 bg-red-100  bg-opacity-40">
-                        <p className='md:ml-24 text-2xl lg:text-3xl font-semibold'>Transactions Summary </p>
+                    <div className="flex-1 bg-red-100  bg-opacity-40 p-5">
+                        <p className=' text-2xl lg:text-3xl font-semibold'>Transactions Summary </p>
                         <div className="flex flex-col md:flex-row   items-center  justify-center">
                             <div className="">
 

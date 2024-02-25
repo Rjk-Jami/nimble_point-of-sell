@@ -4,66 +4,73 @@ import { app } from '../Components/firebase/firebase.config';
 import axios from 'axios';
 export const AuthContext = createContext(null)
 
-const AuthProvider = ({children}) => {
-    const [isLoading,setIsLoading] = useState(false);
-    const [user,setUser] = useState(null);
+const AuthProvider = ({ children }) => {
+    const [isLoadingAuth, setIsLoading] = useState(false);
+    const [user, setUser] = useState(null);
     const auth = getAuth(app);
     const GoogleProvider = new GoogleAuthProvider();
 
 
     //createUserWithEmailAndPassword
-    const createUserWithEmailAndPass = (email, password)=>{
+    const createUserWithEmailAndPass = (email, password) => {
         setIsLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
-        
+
     }
 
     //SignInWithEmailAndPassWord
-    const SignInWithEmailAndPass = (email, password)=>{
+    const SignInWithEmailAndPass = (email, password) => {
         setIsLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
 
     //google login
-    const GoogleLogin = ()=>{
+    const GoogleLogin = () => {
         setIsLoading(true);
         return signInWithPopup(auth, GoogleProvider);
     }
 
     //logout
-    const Logout = ()=>{
+    const Logout = () => {
         return signOut(auth);
     }
-    useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth , currentUser=>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
-            if (currentUser){
-                axios.post('http://localhost:5000/jwt',{email : currentUser.email})
-                .then(data=>{
-                    localStorage.setItem('access-token', data.data.token)
-                      //need to change -=========================================
+            //    console.log(currentUser)
+          
 
-                    localStorage.setItem('inLog', 'nimblePos-01786076080')
 
-                })
+
+
+            if (currentUser) {
+                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                    .then(data => {
+                        localStorage.setItem('access-token', data.data.token)
+                        //need to change -=========================================
+
+                        localStorage.setItem('inLog', 'nimblePos-01786076080')
+                        
+                        
+                    })
             }
-            else{
-                
+            else {
+
                 localStorage.removeItem('access-token')
                 localStorage.removeItem('inLog')
             }
 
         })
-        return ()=>{
+        return () => {
             setIsLoading(false)
             return unsubscribe
         }
-    },[])
+    }, [])
 
     const authInfo = {
         user,
-        isLoading,
+        isLoadingAuth,
         GoogleLogin,
         Logout,
         createUserWithEmailAndPass,
