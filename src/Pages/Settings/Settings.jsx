@@ -27,12 +27,12 @@ const Settings = () => {
 
     
     return (
-        <div className='pt-20 container mx-auto '>
+        <div className='pt-20 mb-5 container mx-auto '>
             <Helmet>
         <title>Nimble-POS -Settings</title>
       </Helmet>
             <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>System Settings</h1>
-            <div className="mt-20 px-5 lg:px-5 xl:px-0">
+            <div className="mt-5 px-5 lg:px-5 xl:px-0">
 
                 <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto space-y-3">
 

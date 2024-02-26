@@ -51,12 +51,12 @@ const Expenses = () => {
         <Helmet>
         <title>Nimble-POS -Expense</title>
       </Helmet>
-            <div className='mt-20 container mx-auto '>
+            <div className='mt-20 container mx-auto mb-5'>
 
                 <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Total Expense : {(totalExpense).toFixed(2)}</h1>
 
                 {/* product nav */}
-                <div className="mt-20 px-5 lg:px-5 xl:px-0">
+                <div className="mt-5 px-5 lg:px-5 xl:px-0">
                     <div className="flex gap-3 flex-col  lg:flex-row justify-between">
                         <div className="w-full lg:w-1/3 flex">
                             <div className="flex-1">

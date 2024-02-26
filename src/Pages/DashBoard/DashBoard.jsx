@@ -52,7 +52,7 @@ useEffect(() => {
         <Helmet>
         <title>Nimble-POS -Dashboard</title>
       </Helmet>
-            <div className=" mt-20 container mx-auto">
+            <div className=" mt-20 container mx-auto mb-5">
                 {/* overview */}
 
                 <div className="mb-6 ">

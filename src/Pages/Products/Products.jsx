@@ -49,7 +49,7 @@ const Products = () => {
         
     }
     return (
-        <div className='mt-20 container mx-auto '>
+        <div className='mt-20 container mx-auto mb-5'>
             <Helmet>
         <title>Nimble-POS -Product</title>
       </Helmet>
