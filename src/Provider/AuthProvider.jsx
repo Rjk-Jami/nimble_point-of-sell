@@ -45,12 +45,12 @@ const AuthProvider = ({ children }) => {
 
 
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                axios.post('https://nimble-server-seven.vercel.app/jwt', { email: currentUser.email })
                     .then(data => {
                         localStorage.setItem('access-token', data.data.token)
                         //need to change -=========================================
 
-                        localStorage.setItem('inLog', import.meta.VITE_INLOG)
+                        localStorage.setItem('inLog', import.meta.env.VITE_INLOGTOKEN)
                         
                         
                     })

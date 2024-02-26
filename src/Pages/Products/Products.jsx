@@ -56,7 +56,7 @@ const Products = () => {
             <h1 className=' px-7 lg:px-0 text-2xl lg:text-3xl font-bold'>Products List : {products?.length}</h1>
 
             {/* product nav */}
-            <div className="mt-20 px-5 lg:px-5 xl:px-0">
+            <div className="mt-5 px-5 lg:px-5 xl:px-0">
                 <div className="flex gap-3 flex-col  lg:flex-row justify-between">
                     <div className="w-full lg:w-1/3 flex">
                         <div className="flex-1">
@@ -83,12 +83,12 @@ const Products = () => {
                 </div>
 
 
-
+                {/* h-[600px] */}
                 <div className="bg-white p-5 bg-opacity-100 relative">
-                    <div className="overflow-x-auto scrollbar" >
+                    <div className="overflow-x-auto scrollbar " >
                         <table className="table  table-sm table-pin-rows table-pin-cols">
                             {/* head */}
-                            <thead>
+                            <thead className=''>
                                 <tr>
 
                                     <th className='uppercase'>Image</th>

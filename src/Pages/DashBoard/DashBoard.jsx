@@ -17,20 +17,33 @@ const DashBoard = () => {
     const { sales, isLoading, error,refetch  } = useSales()
 const [salesByCashRatio, setSalesByCashRatio] = useState([])
 const [salesByCardRatio, setSalesByCardRatio] = useState([])
-    useEffect(() => {
-        setNav('/')
-        const salesByCash = sales?.filter(sale=>sale.paymentMethod === "CASH")
+useEffect(() => {
+    const timer = setTimeout(() => {
+        refetch(); // Fetch data or perform any initial operations here after 1 second delay
+    }, 1000); // 1000 milliseconds = 1 second
+
+    return () => clearTimeout(timer); // Cleanup function to clear the timer if component unmounts or effect re-runs
+}, []);
+
+useEffect(() => {
+    
+    setNav('/');
+    
+        const salesByCash = sales?.filter(sale => sale.paymentMethod === "CASH");
         const cashRatio = salesByCash ? salesByCash.length / sales.length : 0;
 
-        if(cashRatio){
-            setSalesByCashRatio(cashRatio)
+        if (cashRatio) {
+            setSalesByCashRatio(cashRatio);
         }
-        const salesByCard = sales?.filter(sale=>sale.paymentMethod === "CARD")
+
+        const salesByCard = sales?.filter(sale => sale.paymentMethod === "CARD");
         const cardRatio = salesByCard ? salesByCard.length / sales.length : 0;
-        if(cardRatio){
-            setSalesByCardRatio(cardRatio)
+
+        if (cardRatio) {
+            setSalesByCardRatio(cardRatio);
         }
-    }, [sales])
+
+}, [sales]);
     // console.log(salesByCashRatio*100, "salesByCash")
     // console.log(salesByCardRatio*100,"salesByCard")
 
@@ -43,19 +56,19 @@ const [salesByCardRatio, setSalesByCardRatio] = useState([])
                 {/* overview */}
 
                 <div className="mb-6 ">
-                   {user && <Overview1></Overview1>}
+                   <Overview1></Overview1>
                 </div>
                 {/*  top selling and Revenue From Each Products */}
                 <div className="flex flex-col lg:flex-row mt-6 gap-3 w-full">
                     <div className="  md:mx-0 relative w-full lg:w-2/5 bg-red-100 p-5 bg-opacity-40">
                         <p className='text-2xl lg:text-3xl font-semibold absolute'>Top Selling Products</p>
-                       {user &&  <TopSellingP classN={"w-full"}></TopSellingP>}
+                     <TopSellingP classN={"w-full"}></TopSellingP>
 
                     </div>
                     <div className=" md:mx-0 relative flex-1  bg-red-100 p-5 bg-opacity-40">
                         <p className='text-2xl lg:text-3xl font-semibold  left- md:left-24'>Revenue Rockstars</p>
                         <div className="overflow-auto ">
-                           {user && <RevenueFromEachProducts></RevenueFromEachProducts>}
+                <RevenueFromEachProducts></RevenueFromEachProducts>
                         </div>
                     </div>
 

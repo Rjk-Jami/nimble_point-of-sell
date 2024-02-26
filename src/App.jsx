@@ -72,7 +72,7 @@ const App = () => {
             <SideNavBar sideBar={sideBar} ></SideNavBar>
             {/* content */}
             <div className={`${sideBar ? "xl:pl-28" : "xl:ml-56"} w-full `} >
-
+          
               <Outlet></Outlet>
 
             </div>

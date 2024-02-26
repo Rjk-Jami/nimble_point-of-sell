@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import useProducts from '../../hooks/useProducts';
 import ImageUpload from '../../Components/ImageUpload';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -17,7 +17,7 @@ const UpdateProduct = () => {
     const { products, isLoading, refetch } = useProducts()
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const { imageUrl, setImageUrl } = useContext(GlobalVariableContext)
-
+    const navigate = useNavigate()
     const [selectedOption, setSelectedOption] = useState('');
     const [error, setError] = useState(false);
     const [axiosSecure] = useAxiosSecure()
@@ -113,6 +113,7 @@ const UpdateProduct = () => {
             if(data.data.modifiedCount){
                 refetch()
                 toast.success('Updated!')
+                navigate('/products')
             }
         })
 

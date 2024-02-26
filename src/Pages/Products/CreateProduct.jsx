@@ -9,9 +9,10 @@ import ImageUpload from '../../Components/ImageUpload';
 import { GlobalVariableContext } from '../../Provider/GlobalVariableProvider';
 import moment from 'moment';
 import { FaArrowLeft } from "react-icons/fa6";
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
+import toast from 'react-hot-toast';
 
 const CreateProduct = () => {
     const [updateTrigger, setUpdateTrigger] = useState(false); // State variable for triggering updates for reference
@@ -22,6 +23,7 @@ const CreateProduct = () => {
     const { imageUrl, setImageUrl } = useContext(GlobalVariableContext)
     const { nav, setNav } = useContext(NavContext)
     const [axiosSecure] = useAxiosSecure()
+    const navigate = useNavigate()
     useEffect(() => {
         setNav('/products')
         setImageUrl('')
@@ -109,12 +111,18 @@ const CreateProduct = () => {
             axiosSecure.post('/createProduct', createProduct)
                 .then(res => {
                     // console.log(res)
-                    setError(false)
-                    reset()
-                    setImageUrl('')
-                    setUpdateTrigger(!updateTrigger)
+                    if (res.data.insertedId) {
 
-                    // need to add swift
+                        setError(false)
+                        reset()
+                        setImageUrl('')
+                        setUpdateTrigger(!updateTrigger)
+                        toast.success('Inserted!')
+
+                        navigate('/products')
+                        // need to add swift
+                    }
+                    
                 })
         }
 

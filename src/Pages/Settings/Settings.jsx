@@ -135,7 +135,7 @@ const Settings = () => {
                                 {...register('key', { required: true })}
                                 className="mt-1 px-3 py-1.5 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-red-300 focus:border-red-300"
                             />
-                            {errors.key && <p className="text-red-500 absolute insert-0 right-0">Key is required</p>}
+                           
                         </div>
 
                         

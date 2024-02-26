@@ -37,14 +37,14 @@ const Login = () => {
                         role: 'admin'
                     }
                     //    console.log(userData)
-                    axios.post('http://localhost:5000/user', userData)
+                    axios.post('https://nimble-server-seven.vercel.app/user', userData)
                         .then(res => {
-    
+                            setError('')
+                            navigate(to);
                         })
-                }
+                }   
 
-                setError('')
-                navigate(to);
+               
             })
             .catch(error => {
 
@@ -73,14 +73,14 @@ const Login = () => {
                     role: 'biller'
                 }
                    console.log(userData)
-                axios.post('http://localhost:5000/user', userData)
+                axios.post('https://nimble-server-seven.vercel.app/user', userData)
                     .then(res => {
-
+                        setError('')
+                        navigate(to);
                     })
             }
 
-            setError('')
-            navigate(to);
+            
         })
         // navigate(from);
        

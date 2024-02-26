@@ -10,7 +10,7 @@ const useProducts = () => {
 
     const { data: products, isLoading, error, refetch  } = useQuery({
         queryKey: ['products'],
-        enabled: !!localStorage.getItem("access-token"),
+        enabled: !!localStorage.getItem("access-token") && !!user,
         queryFn: async () => {
             const response = await axiosSecure?.get('/products');
             return response.data;

@@ -1,5 +1,5 @@
 # NIMBLE POS
-**Live Line**--------[Nimble-POS]()
+**Live LinK**--------[Nimble-POS]()
 ![nimble](https://i.ibb.co/cJnWZQ6/logo.png)
 >This is Point of Sell, Named : NIMBLE-POS
 

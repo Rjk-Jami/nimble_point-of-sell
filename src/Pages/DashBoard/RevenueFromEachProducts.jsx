@@ -8,12 +8,12 @@ const RevenueFromEachProducts = () => {
 
     useEffect(() => {
       if (products) {
-        const updatedProducts = products.map(product => ({
+        const updatedProducts = products?.map(product => ({
           ...product,
           revenue: (product.sales || 0) * (product.price || 0)
         }));
 
-        const sorted = updatedProducts.sort((a, b) => b.revenue - a.revenue).slice(0, 15);
+        const sorted = updatedProducts?.sort((a, b) => b.revenue - a.revenue).slice(0, 15);
         setSortedProducts(sorted);
       }
     }, [products]);
