@@ -17,9 +17,7 @@ const Login = () => {
     const navigate = useNavigate();
     const to = '/'
     // console.log("user", user)
-    useEffect(()=>{
-        user &&  navigate('/');
-    },[user,navigate])
+   
 
     const onSubmit = (data) => {
         // console.log(data);
@@ -37,11 +35,13 @@ const Login = () => {
                         role: 'admin'
                     }
                     //    console.log(userData)
-                    axios.post('https://nimble-server-seven.vercel.app/user', userData)
-                        .then(res => {
-                            setError('')
-                            navigate(to);
-                        })
+                    // axios.post('https://nimble-server-seven.vercel.app/user', userData)
+                    //     .then(res => {
+                            
+                           
+                    //     })
+                        setError('')
+                        navigate(to);
                 }   
 
                
@@ -73,11 +73,12 @@ const Login = () => {
                     role: 'biller'
                 }
                    console.log(userData)
-                axios.post('https://nimble-server-seven.vercel.app/user', userData)
-                    .then(res => {
-                        setError('')
+                // axios.post('https://nimble-server-seven.vercel.app/user', userData)
+                //     .then(res => {
+                        
+                //     })
+                    setError('')
                         navigate(to);
-                    })
             }
 
             

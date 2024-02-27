@@ -9,7 +9,7 @@ const useSales = () => {
     const {user,isLoadingAuth,GoogleLogin,Logout, setIsLoading} = useContext(AuthContext)
     const { data: sales , isLoading, error, refetch  } = useQuery({
         queryKey: ['sales'],
-        enabled: !!user?.email && !!localStorage.getItem("access-token")   ,
+        enabled: !!localStorage.getItem("access-token"),
         queryFn: async () => {
             const response = await axiosSecure.get('/sales');
             return response.data;

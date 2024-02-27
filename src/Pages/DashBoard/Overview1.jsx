@@ -44,7 +44,7 @@ const Overview1 = () => {
                 <img className='w-20' src={productImg} alt="" />
                 <div className="text-right">
                     <p className='text-xl font-semibold'>Total Products</p>
-                    <p className='text-4xl font-bold'>{totalProduct.toFixed()}</p>
+                    <p className='text-4xl font-bold'>{totalProduct}</p>
                 </div>
             </div>
             <div className="  bg-gradient-to-r from-red-200 to-gray-100 rounded-xl p-6 flex justify-between items-center">

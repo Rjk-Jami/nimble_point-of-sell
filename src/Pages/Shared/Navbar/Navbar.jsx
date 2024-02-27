@@ -62,14 +62,14 @@ const Navbar = ({ sideBarF, sideBar }) => {
                                         <ul tabIndex={0} className=" dropdown-content z-[1] card card-compact p-2 shadow bg-base-100 rounded-box w-28 text-right">
                                         
                                         <li className='w-auto'><NavLink to={'/settings'} className="justify-start flex flex-row-reverse gap-2 items-center text-md hover:text-red-300 cursor-pointer " >
-                                            <FiSettings   className="font-semibold  " /><p>logout</p></NavLink> </li>
+                                            <FiSettings   className="font-semibold  " /><p>settings</p></NavLink> </li>
                                             <li className='w-auto'><div onClick={handleLogout} className="justify-start flex flex-row-reverse gap-2 items-center text-md hover:text-red-300 cursor-pointer " >
                                             <TbLogout2   className="font-semibold  " /><p>logout</p></div> </li>
                                             
                                         </ul></> : <><BsFillPersonFill tabIndex={0} role="button" className="btn btn-circle  btn-md md:btn-sm w-full p-2 text-red-400"  ></BsFillPersonFill><ul tabIndex={0} className=" dropdown-content z-[1] card card-compact p-2 shadow bg-base-100 rounded-box w-28 text-right">
                                         
                                         <li className='w-auto'><NavLink to={'/settings'} className="justify-start flex flex-row-reverse gap-2 items-center text-md hover:text-red-300 cursor-pointer " >
-                                            <FiSettings   className="font-semibold  " /><p>logout</p></NavLink> </li>
+                                            <FiSettings   className="font-semibold  " /><p>Settings</p></NavLink> </li>
                                             <li className='w-auto'><div onClick={handleLogout} className="justify-start flex flex-row-reverse gap-2 items-center text-md hover:text-red-300 cursor-pointer " >
                                             <TbLogout2   className="font-semibold  " /><p>logout</p></div> </li>
                                             
