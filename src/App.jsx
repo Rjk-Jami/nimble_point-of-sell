@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Navbar from './Pages/Shared/Navbar/Navbar';
 
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import SideNavBar from './Pages/Shared/SideNavBar/SideNavBar';
 import { AuthContext } from './Provider/AuthProvider';
 import Login from './Pages/Login/Login';
@@ -11,6 +11,7 @@ const App = () => {
   const [sideBar, setSideBar] = useState(false)
   const { user, isLoadingAuth } = useContext(AuthContext)
   const location = useLocation()
+  const navigate = useNavigate()
   //need to change -=========================================
   const inLog = localStorage.getItem('inLog')
   const inLogToken = import.meta.env.VITE_INLOGTOKEN
@@ -52,14 +53,28 @@ const App = () => {
     setSideBar(!sideBar)
   }
 
+console.log(isLoadingAuth , "app")
 
 
-
+useEffect(()=>{
+if(!user && !inLog){
+  navigate("/login")
+}
+},[user])
 
   return (
 
     <>
-      {(inLogToken === inLog || user) ?
+
+{
+        isLoadingAuth && <>
+          <div className="h-screen w-full flex justify-center items-center">
+          <span className="loading loading-ring loading-lg text-red-400 "></span>
+
+          </div>
+        </>
+      }
+      { inLogToken === inLog   &&
         <div className='relative'>
           <Toaster
             position="top-right"
@@ -78,7 +93,7 @@ const App = () => {
             </div>
           </div>
 
-        </div> : <Login></Login>
+        </div> 
       }
     </>
 

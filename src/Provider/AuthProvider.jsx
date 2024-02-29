@@ -5,7 +5,7 @@ import axios from 'axios';
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({ children }) => {
-    const [isLoadingAuth, setIsLoading] = useState(false);
+    const [isLoadingAuth, setIsLoadingAuth] = useState(false);
     const [user, setUser] = useState(null);
     const auth = getAuth(app);
     const GoogleProvider = new GoogleAuthProvider();
@@ -13,21 +13,21 @@ const AuthProvider = ({ children }) => {
 
     //createUserWithEmailAndPassword
     const createUserWithEmailAndPass = (email, password) => {
-        setIsLoading(true)
+        setIsLoadingAuth(true)
         return createUserWithEmailAndPassword(auth, email, password)
 
     }
 
     //SignInWithEmailAndPassWord
     const SignInWithEmailAndPass = (email, password) => {
-        setIsLoading(true)
+        setIsLoadingAuth(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
 
     //google login
     const GoogleLogin = () => {
-        setIsLoading(true);
+        setIsLoadingAuth(true);
         return signInWithPopup(auth, GoogleProvider);
     }
 
@@ -52,6 +52,7 @@ const AuthProvider = ({ children }) => {
                             //need to change -=========================================
     
                             localStorage.setItem('inLog', import.meta.env.VITE_INLOGTOKEN)
+                            setIsLoadingAuth(false)
                         }
                         
                         
@@ -66,10 +67,11 @@ const AuthProvider = ({ children }) => {
 
         })
         return () => {
-            setIsLoading(false)
+            setIsLoadingAuth(false)
             return unsubscribe
         }
     }, [])
+    console.log(isLoadingAuth, "auth")
 
     const authInfo = {
         user,
@@ -78,7 +80,7 @@ const AuthProvider = ({ children }) => {
         Logout,
         createUserWithEmailAndPass,
         SignInWithEmailAndPass,
-        setIsLoading
+        setIsLoadingAuth
     }
     return (
         <AuthContext.Provider value={authInfo}>

@@ -6,11 +6,11 @@ import { AuthContext } from '../Provider/AuthProvider';
 
 const useProducts = () => {
     const [axiosSecure] = useAxiosSecure()
-    const {user,isLoadingAuth,GoogleLogin,Logout, setIsLoading} = useContext(AuthContext)
+    const {user,isLoadingAuth,GoogleLogin,Logout} = useContext(AuthContext)
 
     const { data: products, isLoading, error, refetch  } = useQuery({
         queryKey: ['products'],
-        enabled: !!localStorage.getItem("access-token") && !!user,
+        enabled: !!localStorage.getItem("access-token") && !!user && !isLoadingAuth,
         queryFn: async () => {
             const response = await axiosSecure?.get('/products');
             return response.data;

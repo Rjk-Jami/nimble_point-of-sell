@@ -12,18 +12,18 @@ import { Helmet } from 'react-helmet-async';
 
 
 const DashBoard = () => {
-    const {user,isLoadingAuth,GoogleLogin,Logout, setIsLoading} = useContext(AuthContext)
+    const {user,isLoadingAuth,GoogleLogin,Logout} = useContext(AuthContext)
     const { nav, setNav } = useContext(NavContext)
     const { sales, isLoading, error,refetch  } = useSales()
 const [salesByCashRatio, setSalesByCashRatio] = useState([])
 const [salesByCardRatio, setSalesByCardRatio] = useState([])
-useEffect(() => {
-    const timer = setTimeout(() => {
-        refetch(); // Fetch data or perform any initial operations here after 1 second delay
-    }, 1000); // 1000 milliseconds = 1 second
+// useEffect(() => {
+//     const timer = setTimeout(() => {
+//         refetch(); // Fetch data or perform any initial operations here after 1 second delay
+//     }, 1000); // 1000 milliseconds = 1 second
 
-    return () => clearTimeout(timer); // Cleanup function to clear the timer if component unmounts or effect re-runs
-}, []);
+//     return () => clearTimeout(timer); // Cleanup function to clear the timer if component unmounts or effect re-runs
+// }, []);
 
 useEffect(() => {
     

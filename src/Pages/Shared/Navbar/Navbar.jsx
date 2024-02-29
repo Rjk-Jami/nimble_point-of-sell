@@ -7,7 +7,7 @@ import { TbLogout2 } from "react-icons/tb";
 import { FiSettings } from 'react-icons/fi';
 
 const Navbar = ({ sideBarF, sideBar }) => {
-    const { user, isLoadingAuth, GoogleLogin, Logout, setIsLoading } = useContext(AuthContext)
+    const { user, isLoadingAuth, GoogleLogin, Logout, setIsLoadingAuth } = useContext(AuthContext)
     const [error, setError] = useState('')
 
 
@@ -18,12 +18,12 @@ const Navbar = ({ sideBarF, sideBar }) => {
                 const loggedUser = result.user
                 // console.log("nav", loggedUser)
 
-                navigate(from, { replace: true });
+                navigate('/login');
 
             })
 
             .catch(error => {
-                setIsLoading(false)
+                setIsLoadingAuth(false)
                 // console.log(error)
                 setError(error.message)
             })
